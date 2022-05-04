@@ -39,13 +39,13 @@ gcloud compute firewall-rules create allow-internal --network custom-vpc --allow
 Reference: https://cloud.google.com/kubernetes-engine/docs/concepts/firewall-rules
 
 
-**Step 4** Create `dev`, `stg`, `prod` subnets for custom-vpc
+**Step 4** Create `dev`, `staging`, `prod` subnets for custom-vpc
 
 
 ```
 env  |   subnet      | pod range       | srv range       | kubectl api range
 dev  | 10.128.0.0/23 | 10.0.0.0/16     | 10.100.0.0/23   | 172.16.0.0/28
-stg  | 10.129.0.0/23 | 10.2.0.0/16     | 10.100.2.0/23   | 172.16.0.16/28
+staging  | 10.129.0.0/23 | 10.2.0.0/16     | 10.100.2.0/23   | 172.16.0.16/28
 prod | 10.130.0.0/23 | 10.4.0.0/16     | 10.100.4.0/23   | 172.16.0.32/28
 ```
 
@@ -59,7 +59,7 @@ gcloud compute networks subnets create gke-dev-cluster-subnet \
 ```
 
 ```
-gcloud compute networks subnets create gke-stg-cluster-subnet \
+gcloud compute networks subnets create gke-staging-cluster-subnet \
 --network custom-vpc \
 --range 10.129.0.0/23 \
 --region $REGION --enable-flow-logs \
@@ -77,7 +77,7 @@ gcloud compute networks subnets create gke-prod-cluster-subnet \
 ```
 
 
-**Step 2** Create a `dev`, `stg`, `prod` [GKE autopilot mode clusters](https://cloud.google.com/kubernetes-engine/docs/concepts)
+**Step 2** Create a `dev`, `staging`, `prod` [GKE autopilot mode clusters](https://cloud.google.com/kubernetes-engine/docs/concepts)
 
 ```
 gcloud container clusters create-auto dev-cluster \
@@ -85,16 +85,19 @@ gcloud container clusters create-auto dev-cluster \
     --network custom-vpc \
     --subnetwork gke-dev-cluster-subnet \
     --cluster-secondary-range-name pods \
-    --services-secondary-range-name services
+    --services-secondary-range-name services \
+    --async
+
 ```
 
 ```
-gcloud container clusters create-auto stg-cluster  \
+gcloud container clusters create-auto staging-cluster  \
     --project=${PROJECT_ID} --region=${REGION} \
     --network custom-vpc \
-    --subnetwork gke-stg-cluster-subnet \
+    --subnetwork gke-staging-cluster-subnet \
     --cluster-secondary-range-name pods \
-    --services-secondary-range-name services
+    --services-secondary-range-name services \
+    --async
 ```
 
 ```
@@ -103,7 +106,8 @@ gcloud container clusters create-auto prod-cluster \
     --network custom-vpc \
     --subnetwork gke-prod-cluster-subnet \
     --cluster-secondary-range-name pods \
-    --services-secondary-range-name services
+    --services-secondary-range-name services \
+    --async
 ```
 
 ## Cleanup
@@ -111,6 +115,6 @@ gcloud container clusters create-auto prod-cluster \
 
 ```
 gcloud container clusters delete dev-cluster --region=${REGION}
-gcloud container clusters delete stg-cluster --region=${REGION}
+gcloud container clusters delete staging-cluster --region=${REGION}
 gcloud container clusters delete prod-cluster --region=${REGION}
 ```
