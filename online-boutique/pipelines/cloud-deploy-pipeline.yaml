@@ -1,0 +1,10 @@
+apiVersion: deploy.cloud.google.com/v1beta1
+kind: DeliveryPipeline
+metadata:
+  name: swampup-2022-online-boutique
+description: Online Boutique delivery pipeline
+serialPipeline:
+ stages:
+ - targetId: swampup-2022-dev-cluster
+ - targetId: swampup-2022-stg-cluster
+ - targetId: swampup-2022-prod-cluster
