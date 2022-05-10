@@ -5,6 +5,10 @@ resources:
     configuration:
       gitProvider: source_repo
       path: gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+        releaseRequestCreate : true
       files:
         include: application-manifests/ads/*
   - name: checkoutservices_deployment_repo
@@ -12,6 +16,10 @@ resources:
     configuration:
       gitProvider: source_repo
       path:  gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+        releaseRequestCreate : true
       files:
         include: application-manifests/checkout/*
   - name: currencyservices_deployment_repo
@@ -19,6 +27,10 @@ resources:
     configuration:
       gitProvider: source_repo
       path:  gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+        releaseRequestCreate : true
       files:
         include: application-manifests/currency/*
   - name: frontendservices_deployment_repo
@@ -26,6 +38,10 @@ resources:
     configuration:
       gitProvider: source_repo
       path:  gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+        releaseRequestCreate : true
       files:
         include: application-manifests/frontend/*
   - name: productservices_deployment_repo
@@ -33,6 +49,10 @@ resources:
     configuration:
       gitProvider: source_repo
       path: gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+        releaseRequestCreate : true
       files:
         include: application-manifests/products/*
   - name: shoppingcartservices_deployment_repo
@@ -40,6 +60,10 @@ resources:
     configuration:
       gitProvider: source_repo
       path: gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+        releaseRequestCreate : true
       files:
         include: application-manifests/shoppingcart/*
   - name: loadgeneratorservices_deployment_repo
@@ -47,6 +71,10 @@ resources:
     configuration:
       gitProvider: source_repo
       path: gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+        releaseRequestCreate : true
       files:
         include: application-manifests/loadgenerator/*
   
