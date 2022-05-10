@@ -63,7 +63,7 @@ pipelines:
           - cd $res_checkoutservices_deployment_repo_resourcePath/online-boutique
           - export REL_TIMESTAMP=$(date '+%Y-%m-%d')
           - >
-           gcloud deploy releases create --release=checkoutservices-release-${REL_TIMESTAMP} 
+           gcloud deploy releases create checkoutservices-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images checkoutservice=$CHECKOUT_SVC_IMAGE,
@@ -97,7 +97,7 @@ pipelines:
           - cd $res_currencyservices_deployment_repo_resourcePath/online-boutique
           - export REL_TIMESTAMP=$(date '+%Y-%m-%d')
           - >
-           gcloud deploy releases create --release=currency-release-${REL_TIMESTAMP} 
+           gcloud deploy releases create currency-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images currencyservice=$CURRENCY_SVC_IMAGE 
@@ -192,7 +192,7 @@ pipelines:
           - export REL_TIMESTAMP=$(date '+%Y-%m-%d')
           - cd $res_shoppingcartservices_deployment_repo_resourcePath/online-boutique
           - >
-           gcloud deploy releases create --release=shoppingcart-release-${REL_TIMESTAMP} 
+           gcloud deploy releases create shoppingcart-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images cartservice=$CART_SVC_IMAGE 
@@ -223,7 +223,7 @@ pipelines:
           - export REL_TIMESTAMP=$(date '+%Y-%m-%d')
           - cd $res_loadgeneratorservices_deployment_repo_resourcePath/online-boutique
           - >
-           gcloud deploy releases create --release=loadgenerator-release-${REL_TIMESTAMP} 
+           gcloud deploy releases create loadgenerator-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images loadgenerator=$LOADGEN_SVC_IMAGE 
