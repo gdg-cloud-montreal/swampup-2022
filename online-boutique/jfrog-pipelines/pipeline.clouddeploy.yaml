@@ -24,7 +24,7 @@ pipelines:
            gcloud components update --quiet && gcloud components install beta --quiet
         onExecute:
           - >
-           gcloud beta deploy releases create
+           gcloud beta deploy releases  adservices-release-${REL_TIMESTAMP} create
            --delivery-pipeline $CD_PIPELINE
            --region $REGION
            --images server=$AD_SVC_IMAGE
@@ -59,7 +59,7 @@ pipelines:
            gcloud components update --quiet && gcloud components install beta --quiet
         onExecute:
           - >
-           gcloud beta deploy releases create
+           gcloud beta deploy releases  checkoutservices-release-${REL_TIMESTAMP} create
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images checkoutservice=$CHECKOUT_SVC_IMAGE,
@@ -91,7 +91,7 @@ pipelines:
            gcloud components update --quiet && gcloud components install beta --quiet
         onExecute:
           - >
-           gcloud beta deploy releases create 
+           gcloud beta deploy releases  currency-release-${REL_TIMESTAMP}create 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images currencyservice=$CURRENCY_SVC_IMAGE 
@@ -120,7 +120,7 @@ pipelines:
            gcloud components update --quiet && gcloud components install beta --quiet
         onExecute:
           - >
-           gcloud beta deploy releases create
+           gcloud beta deploy releases frontend-release-${REL_TIMESTAMP} create
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images frontende=$FRONTEND_SVC_IMAGE 
@@ -151,7 +151,7 @@ pipelines:
            gcloud components update --quiet && gcloud components install beta --quiet
         onExecute:
           - >
-           gcloud beta deploy releases create
+           gcloud beta deploy releases productservices-release-${REL_TIMESTAMP} create
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images productcatalogservice=$PRODUCTCATALOG_SVC_IMAGE,
@@ -180,7 +180,7 @@ pipelines:
            gcloud components update --quiet && gcloud components install beta --quiet
         onExecute:
           - >
-           gcloud beta deploy releases create 
+           gcloud beta deploy releases  shoppingcart-release-${REL_TIMESTAMP} create 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images cartservice=$CART_SVC_IMAGE 
@@ -209,8 +209,10 @@ pipelines:
            gcloud components update --quiet && gcloud components install beta --quiet
         onExecute:
           - >
-           gcloud beta deploy releases create 
+           gcloud beta deploy releases  loadgenerator-release-${REL_TIMESTAMP} create 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images loadgenerator=$LOADGEN_SVC_IMAGE 
            --source ../application-manifests/loadgenerator/
+
+
