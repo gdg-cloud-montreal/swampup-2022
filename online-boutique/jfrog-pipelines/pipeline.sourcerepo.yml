@@ -1,0 +1,52 @@
+resources:
+#Repository Path configs for monorepo
+  - name: adsvc_deployment_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path: gdg-cloud-montreal/swampup-2022
+      files:
+        include: application-manifests/ads/
+  - name: checkoutservices_deploymen_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path:  gdg-cloud-montreal/swampup-2022
+      files:
+        include: application-manifests/checkout/
+  - name: currencyservices_deploymen_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path:  gdg-cloud-montreal/swampup-2022
+      files:
+        include: application-manifests/currency/
+  - name: frontendservices_deploymen_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path:  gdg-cloud-montreal/swampup-2022
+      files:
+        include: application-manifests/frontend/
+  - name: productservices_deploymen_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path: gdg-cloud-montreal/online-boutique
+      files:
+        include: application-manifests/products/
+  - name: shoppingcartservices_deploymen_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path: gdg-cloud-montreal/online-boutique
+      files:
+        include: application-manifests/shoppingcart/
+  - name: loadgeneratorservices_deploymen_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path: gdg-cloud-montreal/online-boutique
+      files:
+        include: application-manifests/loadgenerator/
+  

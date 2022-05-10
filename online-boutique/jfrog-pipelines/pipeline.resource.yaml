@@ -1,16 +1,11 @@
 resources:
-  - name: DeploymentRepo
-    type: GitRepo
-    configuration:
-      gitProvider: source_repo
-      path: gdg-cloud-montreal/swampup-2022
 #Build Information
   - name: adsvc_image
     type: Image
     configuration:
       registry: artifactory
       sourceRepository:  boutique
-      imageName:  ${int_server_name_value}.jfrog.io/boutique/cartservice
+      imageName:  ${int_server_name_value}.jfrog.io/boutique/adservice
       imageTag:  $res_adsvc_build_info_buildNumber
   - name: cartsvc_image
     type: Image
