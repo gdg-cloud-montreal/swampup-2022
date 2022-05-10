@@ -100,7 +100,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            FRONTEND_SVC_IMAGE: ${res_frontendsvc_build_info.docker.image.tag}
+            FRONTEND_SVC_IMAGE: ${res_frontend_build_info.docker.image.tag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-frontend"
         integrations:        
@@ -108,7 +108,7 @@ pipelines:
           - name: gcloud
         inputResources:
           - name: frontendservices_deployment_repo
-          - name: frontendsvc_build_info
+          - name: frontend_build_info
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline"
@@ -187,7 +187,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            LOADGEN_SVC_IMAGE: ${res_loadgeneratorsvc_build_info.docker.image.tag}
+            LOADGEN_SVC_IMAGE: ${res_loadgenerator_build_info.docker.image.tag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-ads"
         integrations:        
@@ -195,7 +195,7 @@ pipelines:
           - name: gcloud
         inputResources:
           - name: loadgeneratorservices_deployment_repo
-          - name: loadgeneratorsvc_build_info
+          - name: loadgenerator_build_info
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline"
