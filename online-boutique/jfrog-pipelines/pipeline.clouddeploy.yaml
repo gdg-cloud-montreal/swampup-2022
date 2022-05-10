@@ -24,6 +24,7 @@ pipelines:
           - > 
            gcloud components update --quiet 
         onExecute:
+          - cd $res_adsvc_deployment_repo_resourcePath
           - >
            gcloud deploy releases create adservices-release-${REL_TIMESTAMP}  
            --delivery-pipeline $CD_PIPELINE
@@ -60,6 +61,7 @@ pipelines:
           - > 
            gcloud components update --quiet 
         onExecute:
+          - cd $res_checkoutservices_deployment_repo_resourcePath
           - >
            gcloud deploy releases create --release=checkoutservices-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
