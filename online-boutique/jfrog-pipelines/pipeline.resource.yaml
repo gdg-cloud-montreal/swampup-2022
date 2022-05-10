@@ -49,7 +49,7 @@ resources:
       sourceRepository:  boutique
       imageName:  paymentservice
       imageTag:  $res_paymentsvc_build_info_buildNumber
-  - name: product_catalogsvc_image
+  - name: productcatalog_svc_image
     type: Image
     configuration:
       registry: artifactory
