@@ -29,7 +29,7 @@ pipelines:
            --delivery-pipeline $CD_PIPELINE
            --region $REGION
            --images server=$AD_SVC_IMAGE
-           --source ../application-manifests/ads/
+           --source /application-manifests/ads/
   - name: deploy_checkoutservices_pipeline
     steps:
     - name: trigger_cloud_deploy_checkoutservices
