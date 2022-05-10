@@ -6,47 +6,47 @@ resources:
       gitProvider: source_repo
       path: gdg-cloud-montreal/swampup-2022
       files:
-        include: application-manifests/ads/
+        include: application-manifests/ads/*
   - name: checkoutservices_deployment_repo
     type: GitRepo
     configuration:
       gitProvider: source_repo
       path:  gdg-cloud-montreal/swampup-2022
       files:
-        include: application-manifests/checkout/
+        include: application-manifests/checkout/*
   - name: currencyservices_deployment_repo
     type: GitRepo
     configuration:
       gitProvider: source_repo
       path:  gdg-cloud-montreal/swampup-2022
       files:
-        include: application-manifests/currency/
+        include: application-manifests/currency/*
   - name: frontendservices_deployment_repo
     type: GitRepo
     configuration:
       gitProvider: source_repo
       path:  gdg-cloud-montreal/swampup-2022
       files:
-        include: application-manifests/frontend/
+        include: application-manifests/frontend/*
   - name: productservices_deployment_repo
     type: GitRepo
     configuration:
       gitProvider: source_repo
       path: gdg-cloud-montreal/swampup-2022
       files:
-        include: application-manifests/products/
+        include: application-manifests/products/*
   - name: shoppingcartservices_deployment_repo
     type: GitRepo
     configuration:
       gitProvider: source_repo
       path: gdg-cloud-montreal/swampup-2022
       files:
-        include: application-manifests/shoppingcart/
+        include: application-manifests/shoppingcart/*
   - name: loadgeneratorservices_deployment_repo
     type: GitRepo
     configuration:
       gitProvider: source_repo
       path: gdg-cloud-montreal/swampup-2022
       files:
-        include: application-manifests/loadgenerator/
+        include: application-manifests/loadgenerator/*
   

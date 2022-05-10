@@ -53,7 +53,6 @@ pipelines:
           - name: emailsvc_image
           - name: paymentsvc_image
           - name: shippingsvc_image
-
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline"
