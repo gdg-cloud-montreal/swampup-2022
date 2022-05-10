@@ -10,7 +10,6 @@ pipelines:
             AD_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/adservice:${run_number}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-ads"
-            REL_TIMESTAMP: ${run_created_at}
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -25,6 +24,7 @@ pipelines:
            gcloud components update --quiet 
         onExecute:
           - cd $res_adsvc_deployment_repo_resourcePath/online-boutique
+          - export REL_TIMESTAMP=$(date '+%Y-%m-%d')
           - >
            gcloud deploy releases create adservices-release-${REL_TIMESTAMP}  
            --delivery-pipeline $CD_PIPELINE
@@ -44,7 +44,6 @@ pipelines:
             SHIPPING_SVC_IMAGE:  ${int_server_name_value}.jfrog.io/boutique/shippingservice:${run_number}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-checkout"
-            REL_TIMESTAMP: ${run_created_at}
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -62,6 +61,7 @@ pipelines:
            gcloud components update --quiet 
         onExecute:
           - cd $res_checkoutservices_deployment_repo_resourcePath/online-boutique
+          - export REL_TIMESTAMP=$(date '+%Y-%m-%d')
           - >
            gcloud deploy releases create --release=checkoutservices-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
@@ -81,7 +81,6 @@ pipelines:
             CURRENCY_SVC: ${int_server_name_value}.jfrog.io/boutique/currencyservice:${run_number}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-currency"
-            REL_TIMESTAMP: ${run_created_at}
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -96,6 +95,7 @@ pipelines:
            gcloud components update --quiet 
         onExecute:
           - cd $res_currencyservices_deployment_repo_resourcePath/online-boutique
+          - export REL_TIMESTAMP=$(date '+%Y-%m-%d')
           - >
            gcloud deploy releases create --release=currency-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
@@ -112,7 +112,6 @@ pipelines:
             FRONTEND_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/frontend:${run_number}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-frontend"
-            REL_TIMESTAMP: ${run_created_at}
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -127,6 +126,7 @@ pipelines:
            gcloud components update --quiet 
         onExecute:
           - cd $res_frontendservices_deployment_repo_resourcePath/online-boutique
+          - export REL_TIMESTAMP=$(date '+%Y-%m-%d')
           - >
            gcloud deploy releases create frontend-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
@@ -144,7 +144,6 @@ pipelines:
             RECOMMENDATION_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/recommendationservice:${run_number}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-products"
-            REL_TIMESTAMP: ${run_created_at}
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -159,6 +158,7 @@ pipelines:
           - > 
            gcloud components update --quiet 
         onExecute:
+          - export REL_TIMESTAMP=$(date '+%Y-%m-%d')
           - cd $res_productservices_deployment_repo_resourcePath/online-boutique
           - >
            gcloud deploy releases create productservices-release-${REL_TIMESTAMP} 
@@ -177,7 +177,6 @@ pipelines:
             CART_SVC_IMAGE:  ${int_server_name_value}.jfrog.io/boutique/cartservice:${run_number}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-shoppingcart"
-            REL_TIMESTAMP: ${run_created_at}
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -190,6 +189,7 @@ pipelines:
           - > 
            gcloud components update --quiet 
         onExecute:
+          - export REL_TIMESTAMP=$(date '+%Y-%m-%d')
           - cd $res_shoppingcartservices_deployment_repo_resourcePath/online-boutique
           - >
            gcloud deploy releases create --release=shoppingcart-release-${REL_TIMESTAMP} 
@@ -207,7 +207,6 @@ pipelines:
             LOADGEN_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/loadgenerator:${run_number}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-ads"
-            REL_TIMESTAMP: ${run_created_at}
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -221,6 +220,7 @@ pipelines:
           - > 
            gcloud components update --quiet 
         onExecute:
+          - export REL_TIMESTAMP=$(date '+%Y-%m-%d')
           - cd $res_loadgeneratorservices_deployment_repo_resourcePath/online-boutique
           - >
            gcloud deploy releases create --release=loadgenerator-release-${REL_TIMESTAMP} 
