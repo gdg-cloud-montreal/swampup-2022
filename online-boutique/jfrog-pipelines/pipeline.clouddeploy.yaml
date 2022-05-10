@@ -21,18 +21,16 @@ pipelines:
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline"
-          - cd $res_adsvc_deployment_repo_resourcePath
-          - ls
           - > 
            gcloud components update --quiet 
         onExecute:
-          - cd $res_adsvc_deployment_repo_resourcePath
+          - cd $res_adsvc_deployment_repo_resourcePath/online-boutique
           - >
            gcloud deploy releases create adservices-release-${REL_TIMESTAMP}  
            --delivery-pipeline $CD_PIPELINE
            --region $REGION
            --images server=$AD_SVC_IMAGE
-           --source 
+           --source application-manifests/ads/
   - name: deploy_checkoutservices_pipeline
     steps:
     - name: trigger_cloud_deploy_checkoutservices
@@ -63,7 +61,7 @@ pipelines:
           - > 
            gcloud components update --quiet 
         onExecute:
-          - cd $res_checkoutservices_deployment_repo_resourcePath
+          - cd $res_checkoutservices_deployment_repo_resourcePath/online-boutique
           - >
            gcloud deploy releases create --release=checkoutservices-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
@@ -72,7 +70,7 @@ pipelines:
            emailservice=$EMAIL_SVC_IMAGE,
            paymentservice=$PAYMENT_SVC_IMAGE,
            shippingservice=$SHIPPING_SVC_IMAGE 
-           --source .
+           --source application-manifests/checkout/
   - name: deploy_currencyservices_pipeline
     steps:
     - name: trigger_cloud_deploy_currencyservice
@@ -97,13 +95,13 @@ pipelines:
           - > 
            gcloud components update --quiet 
         onExecute:
-          - cd $res_currencyservices_deployment_repo_resourcePath
+          - cd $res_currencyservices_deployment_repo_resourcePath/online-boutique
           - >
            gcloud deploy releases create --release=currency-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images currencyservice=$CURRENCY_SVC_IMAGE 
-           --source .
+           --source application-manifests/currency/
   - name: deploy_frontend_pipeline
     steps:
     - name: trigger_cloud_deploy
@@ -128,13 +126,13 @@ pipelines:
           - > 
            gcloud components update --quiet 
         onExecute:
-          - cd $res_frontendservices_deployment_repo_resourcePath
+          - cd $res_frontendservices_deployment_repo_resourcePath/online-boutique
           - >
            gcloud deploy releases create frontend-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images frontende=$FRONTEND_SVC_IMAGE 
-           --source .
+           --source application-manifests/frontend/
   - name: deploy_productservices_pipeline
     steps:
     - name: trigger_cloud_deploy
@@ -161,14 +159,14 @@ pipelines:
           - > 
            gcloud components update --quiet 
         onExecute:
-          - cd $res_productservices_deployment_repo_resourcePath
+          - cd $res_productservices_deployment_repo_resourcePath/online-boutique
           - >
            gcloud deploy releases create productservices-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images productcatalogservice=$PRODUCTCATALOG_SVC_IMAGE,
            recommendationservice=$RECOMMENDATION_SVC_IMAGE 
-           --source .
+           --source application-manifests/products/
   - name: deploy_shoppingcartservices_pipeline
     steps:
     - name: trigger_cloud_deploy
@@ -192,13 +190,13 @@ pipelines:
           - > 
            gcloud components update --quiet 
         onExecute:
-          - cd $res_shoppingcartservices_deployment_repo_resourcePath
+          - cd $res_shoppingcartservices_deployment_repo_resourcePath/online-boutique
           - >
            gcloud deploy releases create --release=shoppingcart-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images cartservice=$CART_SVC_IMAGE 
-           --source .
+           --source application-manifests/shoppingcart/
   - name: deploy_loadgenerator_pipeline
     steps:
     - name: trigger_cloud_deploy
@@ -223,12 +221,12 @@ pipelines:
           - > 
            gcloud components update --quiet 
         onExecute:
-          - cd $res_loadgeneratorservices_deployment_repo_resourcePath
+          - cd $res_loadgeneratorservices_deployment_repo_resourcePath/online-boutique
           - >
            gcloud deploy releases create --release=loadgenerator-release-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images loadgenerator=$LOADGEN_SVC_IMAGE 
-           --source .
+           --source application-manifests/loadgenerator/
 
 
