@@ -6,16 +6,16 @@ deploy:
   kubectl:
     manifests:
     - ../application-manifests/adservice.yaml
-    - ./cartservice.yaml
-    - ./checkoutservice.yaml
-    - ./currencyservice.yaml
-    - ./emailservice.yaml
-    - ./frontend.yaml
-    - ./paymentservice.yaml
-    - ./productcatalogservice.yaml
-    - ./recommendationservice.yaml
-    - ./redis.yaml
-    - ./shippingservice.yaml
+    - ../application-manifests/cartservice.yaml
+    - ../application-manifests/checkoutservice.yaml
+    - ../application-manifests/currencyservice.yaml
+    - ../application-manifests/emailservice.yaml
+    - ../application-manifests/frontend.yaml
+    - ../application-manifests/paymentservice.yaml
+    - ../application-manifests/productcatalogservice.yaml
+    - ../application-manifests/recommendationservice.yaml
+    - ../application-manifests/redis.yaml
+    - ../application-manifests/shippingservice.yaml
 ---
 apiVersion: skaffold/v2beta18
 kind: Config
@@ -26,4 +26,4 @@ requires:
 deploy:
   kubectl:
     manifests:
-    - ./loadgenerator.yaml
+    - ../application-manifests/loadgenerator.yaml
