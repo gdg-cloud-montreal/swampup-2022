@@ -1,22 +1,22 @@
 
 pipelines:
-  - name: deploy_adsvc_pipeline
+  - name: deploy_adservices_pipeline
     steps:
-    - name: trigger_cloud_deploy
+    - name: trigger_cloud_deploy_adservice
       type: bash
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
             AD_SVC_IMAGE: ${res_adsvc_image_imageName}:${res_ad_svc_image_imageTag}
             REGION: "us-central1"
-            CD_PIPELINE: "swampup-2022-online-boutique"
+            CD_PIPELINE: "swampup-2022-boutique-ads"
         integrations:        
           - name: artifactory
           - name: server_name
           - name: gcloud
         inputResources:
           - name: DeploymentRepo
-          - name: adsvc_build_info
+          - name: adsvc_image
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline"
@@ -27,5 +27,192 @@ pipelines:
            gcloud beta deploy releases create
            --delivery-pipeline $CD_PIPELINE
            --region $REGION
-           --images $AD_SVC_IMAGE
-           --source ../application-manifests/*
+           --images server=$AD_SVC_IMAGE
+           --source ../application-manifests/ads/
+  - name: deploy_checkoutservices_pipeline
+    steps:
+    - name: trigger_cloud_deploy_checkoutservices
+      type: bash
+      configuration:
+        affinityGroup: fmkGroup
+        environmentVariables:
+            CHECKOUT_SVC_IMAGE:  ${res_checkoutsvc_image_imageName}:${res_checkoutsvc_image_image_imageTag}
+            EMAIL_SVC_IMAGE:  ${res_emailsvc_image_imageName}:${res_emailsvc_image_imageTag}
+            PAYMENT_SVC_IMAGE:  ${res_paymentsvc_image_imageName}:${res_paymentsvc_image_imageTag}
+            SHIPPING_SVC_IMAGE:  ${res_shippingsvc_image_imageName}:${res_shippingsvc_image_imageTag}
+            REGION: "us-central1"
+            CD_PIPELINE: "swampup-2022-boutique-checkout"
+        integrations:        
+          - name: artifactory
+          - name: server_name
+          - name: gcloud
+        inputResources:
+          - name: DeploymentRepo
+          - name: checkoutsvc_image
+          - name: emailsvc_image
+          - name: paymentsvc_image
+          - name: shippingsvc_image
+      execution:
+        onStart:
+          - echo "Trigger Cloud Deploy Pipeline"
+          - > 
+           gcloud components update --quiet && gcloud components install beta --quiet
+        onExecute:
+          - >
+           gcloud beta deploy releases create
+           --delivery-pipeline $CD_PIPELINE
+           --region $REGION
+           --images checkoutservice=$CHECKOUT_SVC_IMAGE,
+           emailservice=$EMAIL_SVC_IMAGE,
+           paymentservice=$PAYMENT_SVC_IMAGE,
+           shippingservice=$SHIPPING_SVC_IMAGE
+           --source ../application-manifests/checkout/
+  - name: deploy_currencyservices_pipeline
+    steps:
+    - name: trigger_cloud_deploy_currencyservice
+      type: bash
+      configuration:
+        affinityGroup: fmkGroup
+        environmentVariables:
+            CURRENCY_SVC: ${res_currencysvc_image_imageName}:${res_currencysvc_image_imageTag}
+            REGION: "us-central1"
+            CD_PIPELINE: "swampup-2022-boutique-currency"
+        integrations:        
+          - name: artifactory
+          - name: server_name
+          - name: gcloud
+        inputResources:
+          - name: DeploymentRepo
+          - name: currencysvc_image
+      execution:
+        onStart:
+          - echo "Trigger Cloud Deploy Pipeline"
+          - > 
+           gcloud components update --quiet && gcloud components install beta --quiet
+        onExecute:
+          - >
+           gcloud beta deploy releases create
+           --delivery-pipeline $CD_PIPELINE
+           --region $REGION
+           --images currencyservice=$CURRENCY_SVC_IMAGE
+           --source ../application-manifests/currency/
+  - name: deploy_frontend_pipeline
+    steps:
+    - name: trigger_cloud_deploy
+      type: bash
+      configuration:
+        affinityGroup: fmkGroup
+        environmentVariables:
+            FRONTEND_SVC_IMAGE: ${res_frontendsvc_image_imageName}:${res_frontendsvc_image_imageTag}
+            REGION: "us-central1"
+            CD_PIPELINE: "swampup-2022-boutique-frontend"
+        integrations:        
+          - name: artifactory
+          - name: server_name
+          - name: gcloud
+        inputResources:
+          - name: DeploymentRepo
+          - name: frontendsvc_image
+      execution:
+        onStart:
+          - echo "Trigger Cloud Deploy Pipeline"
+          - > 
+           gcloud components update --quiet && gcloud components install beta --quiet
+        onExecute:
+          - >
+           gcloud beta deploy releases create
+           --delivery-pipeline $CD_PIPELINE
+           --region $REGION
+           --images frontende=$FRONTEND_SVC_IMAGE
+           --source ../application-manifests/frontend/
+  - name: deploy_productservicespipeline
+    steps:
+    - name: trigger_cloud_deploy
+      type: bash
+      configuration:
+        affinityGroup: fmkGroup
+        environmentVariables:
+            PRODUCTCATALOG_SVC_IMAGE: ${res_productcatalogsvc_image_imageName}:${res_productcatalogsvc_imageimageTag}
+            RECOMMENDATION_SVC_IMAGE: ${res_recommendationsvc_image_imageName}:${res_recommendationsvc_image_imageTag}
+            REGION: "us-central1"
+            CD_PIPELINE: "swampup-2022-boutique-products"
+        integrations:        
+          - name: artifactory
+          - name: server_name
+          - name: gcloud
+        inputResources:
+          - name: DeploymentRepo
+          - name: productcatalogsvc_image
+          - name: recommendationsvc_image
+      execution:
+        onStart:
+          - echo "Trigger Cloud Deploy Pipeline"
+          - > 
+           gcloud components update --quiet && gcloud components install beta --quiet
+        onExecute:
+          - >
+           gcloud beta deploy releases create
+           --delivery-pipeline $CD_PIPELINE
+           --region $REGION
+           --images productcatalogservice=$PRODUCTCATALOG_SVC_IMAGE,
+           recommendationservice=$RECOMMENDATION_SVC_IMAGE
+           --source ../application-manifests/products/
+  - name: deploy_shoppingcartservices_pipeline
+    steps:
+    - name: trigger_cloud_deploy
+      type: bash
+      configuration:
+        affinityGroup: fmkGroup
+        environmentVariables:
+            CART_SVC_IMAGE: ${res_cartsvc_image_imageName}:${res_cartsvc_image_imageTag}
+            REGION: "us-central1"
+            CD_PIPELINE: "swampup-2022-boutique-shoppingcart"
+        integrations:        
+          - name: artifactory
+          - name: server_name
+          - name: gcloud
+        inputResources:
+          - name: DeploymentRepo
+          - name: cartsvc_image
+
+      execution:
+        onStart:
+          - echo "Trigger Cloud Deploy Pipeline"
+          - > 
+           gcloud components update --quiet && gcloud components install beta --quiet
+        onExecute:
+          - >
+           gcloud beta deploy releases create
+           --delivery-pipeline $CD_PIPELINE
+           --region $REGION
+           --images cartservice=$CART_SVC_IMAGE
+           --source ../application-manifests/shoppingcart/
+  - name: deploy_loadgenerator_pipeline
+    steps:
+    - name: trigger_cloud_deploy
+      type: bash
+      configuration:
+        affinityGroup: fmkGroup
+        environmentVariables:
+            LOADGEN_SVC_IMAGE: ${res_loadgensvc_image_imageName}:${res_loadgensvc_image_imageTag}
+            REGION: "us-central1"
+            CD_PIPELINE: "swampup-2022-boutique-ads"
+        integrations:        
+          - name: artifactory
+          - name: server_name
+          - name: gcloud
+        inputResources:
+          - name: DeploymentRepo
+          - name: loadgensvc_image
+      execution:
+        onStart:
+          - echo "Trigger Cloud Deploy Pipeline"
+          - > 
+           gcloud components update --quiet && gcloud components install beta --quiet
+        onExecute:
+          - >
+           gcloud beta deploy releases create
+           --delivery-pipeline $CD_PIPELINE
+           --region $REGION
+           --images loadgenerator=$LOADGEN_SVC_IMAGE
+           --source ../application-manifests/loadgenerator/
