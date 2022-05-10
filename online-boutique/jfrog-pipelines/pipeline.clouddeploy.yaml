@@ -21,6 +21,8 @@ pipelines:
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline"
+          - cd $res_adsvc_deployment_repo_resourcePath
+          - ls
           - > 
            gcloud components update --quiet 
         onExecute:
@@ -30,7 +32,7 @@ pipelines:
            --delivery-pipeline $CD_PIPELINE
            --region $REGION
            --images server=$AD_SVC_IMAGE
-           --source .
+           --source 
   - name: deploy_checkoutservices_pipeline
     steps:
     - name: trigger_cloud_deploy_checkoutservices
