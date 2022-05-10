@@ -16,7 +16,7 @@ pipelines:
           - name: gcloud
         inputResources:
           - name: adsvc_deployment_repo
-          - name: adsvc_image
+          - name: ad_svc_image
           - name: adsvc_build_info
       execution:
         onStart:
@@ -49,10 +49,10 @@ pipelines:
           - name: gcloud
         inputResources:
           - name: checkoutservices_deployment_repo
-          - name: checkoutsvc_image
-          - name: emailsvc_image
-          - name: paymentsvc_image
-          - name: shippingsvc_image
+          - name: checkout_svc_image
+          - name: email_svc_image
+          - name: payment_svc_image
+          - name: shipping_svc_image
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline"
@@ -84,7 +84,7 @@ pipelines:
           - name: gcloud
         inputResources:
           - name: currencyservices_deployment_repo
-          - name: currencysvc_image
+          - name: currency_svc_image
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline"
@@ -113,7 +113,7 @@ pipelines:
           - name: gcloud
         inputResources:
           - name: frontendservices_deployment_repo
-          - name: frontendsvc_image
+          - name: frontend_svc_image
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline"
@@ -143,8 +143,8 @@ pipelines:
           - name: gcloud
         inputResources:
           - name: productservices_deployment_repo
-          - name: productcatalogsvc_image
-          - name: recommendationsvc_image
+          - name: productcatalog_svc_image
+          - name: recommendation_svc_image
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline"
@@ -174,7 +174,7 @@ pipelines:
           - name: gcloud
         inputResources:
           - name: shoppingcartservices_deployment_repo
-          - name: cartsvc_image
+          - name: cart_svc_image
 
       execution:
         onStart:
@@ -204,7 +204,7 @@ pipelines:
           - name: gcloud
         inputResources:
           - name: loadgeneratorservices_deployment_repo
-          - name: loadgensvc_image
+          - name: loadgen_svc_image
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline"

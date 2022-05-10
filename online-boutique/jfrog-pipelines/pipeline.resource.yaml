@@ -1,76 +1,76 @@
 resources:
 #Build Information
-  - name: adsvc_image
+  - name: ad_svc_image
     type: Image
     configuration:
       registry: artifactory
       sourceRepository:  boutique
       imageName:  adservice
       imageTag:  $res_adsvc_build_info_buildNumber
-  - name: cartsvc_image
+  - name: cart_svc_image
     type: Image
     configuration:
       registry: artifactory
       sourceRepository:  boutique
       imageName:  cartservice
       imageTag:  $res_cartsvc_build_info_buildNumber
-  - name: checkoutsvc_image
+  - name: checkout_svc_image
     type: Image
     configuration:
       registry: artifactory
       sourceRepository:  boutique
       imageName:  checkoutservice
       imageTag:  $res_checkoutsvc_build_info_buildNumber
-  - name: currencysvc_image
+  - name: currency_svc_image
     type: Image
     configuration:
       registry: artifactory
       sourceRepository:  boutique
       imageName:  currencyservice
       imageTag:  $res_currencysvc_build_info_buildNumber
-  - name: emailsvc_image
+  - name: email_svc_image
     type: Image
     configuration:
       registry: artifactory
       sourceRepository:  boutique
       imageName:  emailservice
       imageTag:  $res_emailsvc_build_info_buildNumber
-  - name: frontendsvc_image
+  - name: frontend_svc_image
     type: Image
     configuration:
       registry: artifactory
       sourceRepository:  boutique
       imageName:  frontend
       imageTag:  $res_frontend_build_info_buildNumber
-  - name: paymentsvc_image
+  - name: payment_svc_image
     type: Image
     configuration:
       registry: artifactory
       sourceRepository:  boutique
       imageName:  paymentservice
       imageTag:  $res_paymentsvc_build_info_buildNumber
-  - name: productcatalogsvc_image
+  - name: product_catalogsvc_image
     type: Image
     configuration:
       registry: artifactory
       sourceRepository:  boutique
       imageName:  productcatalogservice
       imageTag:  $res_productcatalogsvc_build_info_buildNumber
-  - name: recommendationsvc_image
+  - name: recommendation_svc_image
     type: Image
     configuration:
       registry: artifactory
       sourceRepository:  boutique
       imageName:  recommendationservice
       imageTag:  $res_recommendationsvc_build_info_buildNumber
-  - name: shippingsvc_image
+  - name: shipping_svc_image
     type: Image
     configuration:
       registry: artifactory
       sourceRepository:  boutique
       imageName:  shippingservice
       imageTag:  $res_shippingsvc_build_info_buildNumber
-  - name: loadgensvc_image
+  - name: loadgen_svc_image
     type: Image
     configuration:
       registry: artifactory
