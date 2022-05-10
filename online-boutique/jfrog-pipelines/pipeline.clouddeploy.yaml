@@ -7,7 +7,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            AD_SVC_IMAGE: ${res_adsvc_image_imageName}:${res_adsvc_image_imageTag}
+            AD_SVC_IMAGE: ${res_adsvc_build_info.docker.image.tag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-ads"
         integrations:        
@@ -16,7 +16,6 @@ pipelines:
           - name: gcloud
         inputResources:
           - name: adsvc_deployment_repo
-          - name: ad_svc_image
           - name: adsvc_build_info
       execution:
         onStart:
