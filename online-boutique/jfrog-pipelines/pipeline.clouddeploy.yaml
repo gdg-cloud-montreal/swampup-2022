@@ -16,6 +16,8 @@ pipelines:
         inputResources:
           - name: adsvc_deployment_repo
           - name: adsvc_build_info
+        inputSteps:
+          - name: publish_adsvc_build
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline"
@@ -41,6 +43,11 @@ pipelines:
             SHIPPING_SVC_IMAGE:  ${res_shippingsvc_build_info.docker.image.tag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-checkout"
+        inputSteps:
+          - name: publish_checkoutsvc_build
+          - name: publish_emailsvc_build
+          - name: publish_paymentsvc_build
+          - name: publish_shippingsvc_build
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -75,6 +82,8 @@ pipelines:
             CURRENCY_SVC: ${res_currencysvc_build_info.docker.image.tag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-currency"
+        inputSteps:
+          - name: publish_currencysvc_build
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -103,6 +112,8 @@ pipelines:
             FRONTEND_SVC_IMAGE: ${res_frontend_build_info.docker.image.tag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-frontend"
+        inputSteps:
+          - name: publish_frontend_build       
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -132,6 +143,9 @@ pipelines:
             RECOMMENDATION_SVC_IMAGE: ${res_recommendationsvc_build_info.docker.image.tag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-products"
+        inputSteps:
+          - name: publish_productcatalogsvc_build
+          - name: publish_recommendationsvc_build
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -162,6 +176,8 @@ pipelines:
             CART_SVC_IMAGE: ${res_cartsvc_build_info.docker.image.tag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-shoppingcart"
+        inputSteps:
+          - name: publish_cartsvc_build
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -190,6 +206,8 @@ pipelines:
             LOADGEN_SVC_IMAGE: ${res_loadgenerator_build_info.docker.image.tag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-ads"
+        inputSteps:
+          - name: publish_loadgenerator_build
         integrations:        
           - name: artifactory
           - name: gcloud
