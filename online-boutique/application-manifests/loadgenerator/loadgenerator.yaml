@@ -47,8 +47,8 @@ spec:
         - name: FRONTEND_ADDR
           value: "frontend:80"
       containers:
-      - name: main
-        image: 
+      - name: loadgenerator
+        image: loadgenerator
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"

@@ -29,7 +29,7 @@ spec:
     spec:
       serviceAccountName: default
       containers:
-        - name: server
+        - name: frontend
           image: frontend
           ports:
           - containerPort: 8080
