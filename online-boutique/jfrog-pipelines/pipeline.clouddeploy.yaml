@@ -48,7 +48,7 @@ pipelines:
           - name: server_name
           - name: gcloud
         inputResources:
-          - name: checkoutservices_deploymen_repo
+          - name: checkoutservices_deployment_repo
           - name: checkoutsvc_image
           - name: emailsvc_image
           - name: paymentsvc_image
@@ -84,7 +84,7 @@ pipelines:
           - name: server_name
           - name: gcloud
         inputResources:
-          - name: currencyservices_deploymen_repo
+          - name: currencyservices_deployment_repo
           - name: currencysvc_image
       execution:
         onStart:
@@ -113,7 +113,7 @@ pipelines:
           - name: server_name
           - name: gcloud
         inputResources:
-          - name: frontendservices_deploymen_repo
+          - name: frontendservices_deployment_repo
           - name: frontendsvc_image
       execution:
         onStart:
@@ -143,7 +143,7 @@ pipelines:
           - name: server_name
           - name: gcloud
         inputResources:
-          - name: productservices_deploymen_repo
+          - name: productservices_deployment_repo
           - name: productcatalogsvc_image
           - name: recommendationsvc_image
       execution:
@@ -174,7 +174,7 @@ pipelines:
           - name: server_name
           - name: gcloud
         inputResources:
-          - name: shoppingcartservices_deploymen_repo
+          - name: shoppingcartservices_deployment_repo
           - name: cartsvc_image
 
       execution:
@@ -204,7 +204,7 @@ pipelines:
           - name: server_name
           - name: gcloud
         inputResources:
-          - name: loadgeneratorservices_deploymen_repo
+          - name: loadgeneratorservices_deployment_repo
           - name: loadgensvc_image
       execution:
         onStart:
