@@ -1,0 +1,29 @@
+apiVersion: skaffold/v2beta18
+kind: Config
+metadata:
+  name: online-boutique
+deploy:
+  kubectl:
+    manifests:
+    - ../application-manifests/adservice.yaml
+    - ./cartservice.yaml
+    - ./checkoutservice.yaml
+    - ./currencyservice.yaml
+    - ./emailservice.yaml
+    - ./frontend.yaml
+    - ./paymentservice.yaml
+    - ./productcatalogservice.yaml
+    - ./recommendationservice.yaml
+    - ./redis.yaml
+    - ./shippingservice.yaml
+---
+apiVersion: skaffold/v2beta18
+kind: Config
+metadata:
+  name: loadgenerator
+requires:
+  - configs: [online-boutique]
+deploy:
+  kubectl:
+    manifests:
+    - ./loadgenerator.yaml

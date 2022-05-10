@@ -1,7 +1,7 @@
 # swampUP 2022
 
 
-## Aboout
+## About
 
 In our session, we will tell a story of an imaginary company that wants to deliver high-quality software faster to their customers, yet something is holding it back. Our imaginary company learned about DORA assessments and discovered they are a medium-level performer among similar companies in the industry. They needed to improve several things, including automating their CI and CD processes, to go to the next level.
 
