@@ -7,12 +7,13 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            AD_SVC_IMAGE: ${res_adsvc_build_info.docker.image.tag}
+            AD_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/adservice:${run_number}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-ads"
         integrations:        
           - name: artifactory
           - name: gcloud
+          - name: server_name
         inputResources:
           - name: adsvc_deployment_repo
           - name: adsvc_build_info
@@ -35,15 +36,16 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            CHECKOUT_SVC_IMAGE:  ${res_checkoutsvc_build_info.docker.image.tag}
-            EMAIL_SVC_IMAGE:  ${res_emailsvc_build_info.docker.image.tag}
-            PAYMENT_SVC_IMAGE:  ${res_paymentsvc_build_info.docker.image.tag}
-            SHIPPING_SVC_IMAGE:  ${res_shippingsvc_build_info.docker.image.tag}
+            CHECKOUT_SVC_IMAGE:  ${int_server_name_value}.jfrog.io/boutique/checkoutservice:${run_number}
+            EMAIL_SVC_IMAGE:  ${int_server_name_value}.jfrog.io/boutique/emailservice:${run_number}
+            PAYMENT_SVC_IMAGE:  ${int_server_name_value}.jfrog.io/boutique/paymentservice:${run_number}
+            SHIPPING_SVC_IMAGE:  ${int_server_name_value}.jfrog.io/boutique/shippingservice:${run_number}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-checkout"
         integrations:        
           - name: artifactory
           - name: gcloud
+          - name: server_name
         inputResources:
           - name: checkoutservices_deployment_repo
           - name: checkoutsvc_build_info
@@ -72,12 +74,13 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            CURRENCY_SVC: ${res_currencysvc_build_info.docker.image.tag}
+            CURRENCY_SVC: ${int_server_name_value}.jfrog.io/boutique/currencyservice:${run_number}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-currency"
         integrations:        
           - name: artifactory
           - name: gcloud
+          - name: server_name
         inputResources:
           - name: currencyservices_deployment_repo
           - name: currencysvc_build_info
@@ -100,12 +103,13 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            FRONTEND_SVC_IMAGE: ${res_frontend_build_info.docker.image.tag}
+            FRONTEND_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/frontend:${run_number}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-frontend"  
         integrations:        
           - name: artifactory
           - name: gcloud
+          - name: server_name
         inputResources:
           - name: frontendservices_deployment_repo
           - name: frontend_build_info
@@ -128,13 +132,14 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            PRODUCTCATALOG_SVC_IMAGE: ${res_productcatalogsvc_build_info.docker.image.tag}
-            RECOMMENDATION_SVC_IMAGE: ${res_recommendationsvc_build_info.docker.image.tag}
+            PRODUCTCATALOG_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/productcatalogservice:${run_number}
+            RECOMMENDATION_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/recommendationservice:${run_number}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-products"
         integrations:        
           - name: artifactory
           - name: gcloud
+          - name: server_name
         inputResources:
           - name: productservices_deployment_repo
           - name: productcatalogsvc_build_info
@@ -187,12 +192,13 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            LOADGEN_SVC_IMAGE: ${res_loadgenerator_build_info.docker.image.tag}
+            LOADGEN_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/loadgenerator:${run_number}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-ads"
         integrations:        
           - name: artifactory
           - name: gcloud
+          - name: server_name
         inputResources:
           - name: loadgeneratorservices_deployment_repo
           - name: loadgenerator_build_info
