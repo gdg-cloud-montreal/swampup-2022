@@ -25,7 +25,7 @@ pipelines:
            gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create --release=adservices-release-${REL_TIMESTAMP}  
+           gcloud deploy releases create adservices-release-${REL_TIMESTAMP}  
            --delivery-pipeline $CD_PIPELINE
            --region $REGION
            --images server=$AD_SVC_IMAGE
