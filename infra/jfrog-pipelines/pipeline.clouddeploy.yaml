@@ -21,7 +21,7 @@ pipelines:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
-          - cd $res_productservices_deployment_repo_resourcePath/online-boutique
+          - cd $res_adsvc_deployment_repo_resourcePath/online-boutique
           - > 
            gcloud components update --quiet 
         onExecute:
@@ -58,7 +58,7 @@ pipelines:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
-          - cd $res_productservices_deployment_repo_resourcePath/online-boutique
+          - cd $res_checkoutservices_deployment_repo_resourcePath/online-boutique
           - > 
            gcloud components update --quiet 
         onExecute:
@@ -89,7 +89,7 @@ pipelines:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
-          - cd $res_productservices_deployment_repo_resourcePath/online-boutique
+          - cd $res_currencyservices_deployment_repo_resourcePath/online-boutique
           - > 
            gcloud components update --quiet 
         onExecute:
@@ -120,7 +120,7 @@ pipelines:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
-          - cd $res_productservices_deployment_repo_resourcePath/online-boutique
+          - cd $res_frontendservices_deployment_repo_resourcePath/online-boutique
           - > 
            gcloud components update --quiet 
         onExecute:
@@ -128,7 +128,7 @@ pipelines:
            gcloud deploy releases create frontend-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
-           --images frontende=$FRONTEND_SVC_IMAGE 
+           --images frontend=$FRONTEND_SVC_IMAGE 
            --source application-manifests/frontend/
   - name: deploy_productservices_pipeline
     steps:
@@ -183,7 +183,7 @@ pipelines:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
-          - cd $res_productservices_deployment_repo_resourcePath/online-boutique
+          - cd $res_shoppingcartservices_deployment_repo_resourcePath/online-boutique
           - > 
            gcloud components update --quiet 
         onExecute:
@@ -214,7 +214,7 @@ pipelines:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
-          - cd $res_productservices_deployment_repo_resourcePath/online-boutique
+          - cd $res_loadgeneratorservices_deployment_repo_resourcePath/online-boutique
           - > 
            gcloud components update --quiet 
         onExecute:
