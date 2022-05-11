@@ -75,7 +75,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            CURRENCY_SVC: ${int_server_name_value}.jfrog.io/boutique/currencyservice:${res_currencysvc_build_info_buildNumber}
+            CURRENCY_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/currencyservice:${res_currencysvc_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-currency"
         integrations:        
