@@ -38,10 +38,10 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            CHECKOUT_SVC_IMAGE:  ${int_server_name_value}.jfrog.io/boutique/checkoutservice:${res_adsvc_build_infocheckoutsvc_build_info_buildNumber}
-            EMAIL_SVC_IMAGE:  ${int_server_name_value}.jfrog.io/boutique/emailservice:${res_emailsvc_build_info_buildNumber}
-            PAYMENT_SVC_IMAGE:  ${int_server_name_value}.jfrog.io/boutique/paymentservice:${res_paymentsvc_build_info_buildNumber}
-            SHIPPING_SVC_IMAGE:  ${int_server_name_value}.jfrog.io/boutique/shippingservice:${res_shippingsvc_build_info_buildNumber}
+            CHECKOUT_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/checkoutservice:${res_checkoutsvc_build_info_buildNumber}
+            EMAIL_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/emailservice:${res_emailsvc_build_info_buildNumber}
+            PAYMENT_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/paymentservice:${res_paymentsvc_build_info_buildNumber}
+            SHIPPING_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/shippingservice:${res_shippingsvc_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-checkout"
         integrations:        
@@ -170,7 +170,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            CART_SVC_IMAGE:  ${int_server_name_value}.jfrog.io/boutique/cartservice:${res_cartsvc_build_info_buildNumber}
+            CART_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/cartservice:${res_cartsvc_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-shoppingcart"
         integrations:        
