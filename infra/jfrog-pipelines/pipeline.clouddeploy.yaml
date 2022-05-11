@@ -26,7 +26,7 @@ pipelines:
            gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create adservices-release-${REL_TIMESTAMP}  
+           gcloud deploy releases create adsvc-${REL_TIMESTAMP}  
            --delivery-pipeline $CD_PIPELINE
            --region $REGION
            --images server=$AD_SVC_IMAGE
@@ -63,7 +63,7 @@ pipelines:
            gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create checkoutservices-release-${REL_TIMESTAMP} 
+           gcloud deploy releases create checkoutsvc-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images checkoutservice=$CHECKOUT_SVC_IMAGE,emailservice=$EMAIL_SVC_IMAGE,paymentservice=$PAYMENT_SVC_IMAGE,shippingservice=$SHIPPING_SVC_IMAGE 
@@ -94,14 +94,14 @@ pipelines:
            gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create currency-release-${REL_TIMESTAMP} 
+           gcloud deploy releases create currency-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images currencyservice=$CURRENCY_SVC_IMAGE 
            --source application-manifests/currency/
   - name: deploy_frontend_pipeline
     steps:
-    - name: trigger_cloud_deploy
+    - name: trigger_cloud_deploy_frontend
       type: bash
       configuration:
         affinityGroup: fmkGroup
@@ -125,14 +125,14 @@ pipelines:
            gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create frontend-release-${REL_TIMESTAMP} 
+           gcloud deploy releases create frontend-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images frontende=$FRONTEND_SVC_IMAGE 
            --source application-manifests/frontend/
   - name: deploy_productservices_pipeline
     steps:
-    - name: trigger_cloud_deploy
+    - name: trigger_cloud_deploy_productservices
       type: bash
       configuration:
         affinityGroup: fmkGroup
@@ -152,20 +152,20 @@ pipelines:
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
-          - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
+          - export REL_TIMESTAMP=$(date '+%Y%m%d%H%S')
           - cd $res_productservices_deployment_repo_resourcePath/online-boutique
           - > 
            gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create productservices-release-${REL_TIMESTAMP} 
+           gcloud deploy releases create productsvc-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images productcatalogservice=$PRODUCTCATALOG_SVC_IMAGE,recommendationservice=$RECOMMENDATION_SVC_IMAGE 
            --source application-manifests/products/
   - name: deploy_shoppingcartservices_pipeline
     steps:
-    - name: trigger_cloud_deploy
+    - name: trigger_cloud_deploy_shoppingcart
       type: bash
       configuration:
         affinityGroup: fmkGroup
@@ -188,14 +188,14 @@ pipelines:
            gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create shoppingcart-release-${REL_TIMESTAMP} 
+           gcloud deploy releases create shoppingcart-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images cartservice=$CART_SVC_IMAGE 
            --source application-manifests/shoppingcart/
   - name: deploy_loadgenerator_pipeline
     steps:
-    - name: trigger_cloud_deploy
+    - name: trigger_cloud_deploy_loadgenerator
       type: bash
       configuration:
         affinityGroup: fmkGroup
@@ -219,7 +219,7 @@ pipelines:
            gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create loadgenerator-release-${REL_TIMESTAMP} 
+           gcloud deploy releases create loadgenerator-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images loadgenerator=$LOADGEN_SVC_IMAGE 
