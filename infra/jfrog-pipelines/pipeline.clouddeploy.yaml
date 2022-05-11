@@ -176,6 +176,7 @@ pipelines:
         integrations:        
           - name: artifactory
           - name: gcloud
+          - name: server_name
         inputResources:
           - name: shoppingcartservices_deployment_repo
           - name: cartsvc_build_info
