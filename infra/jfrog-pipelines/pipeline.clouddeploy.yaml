@@ -191,7 +191,7 @@ pipelines:
            gcloud deploy releases create shoppingcart-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
-           --images cartservice=$CART_SVC_IMAGE 
+           --images=cartservice=$CART_SVC_IMAGE 
            --source application-manifests/shoppingcart/
   - name: deploy_loadgenerator_pipeline
     steps:
@@ -222,7 +222,7 @@ pipelines:
            gcloud deploy releases create loadgenerator-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
-           --images loadgenerator=$LOADGEN_SVC_IMAGE 
+           --images=loadgenerator=$LOADGEN_SVC_IMAGE 
            --source application-manifests/loadgenerator/
 
 
