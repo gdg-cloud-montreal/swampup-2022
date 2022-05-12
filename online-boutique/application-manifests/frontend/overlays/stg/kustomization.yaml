@@ -1,6 +1,6 @@
 resources:
   - ../../base
-patchesStrategicMerge:
+patches:
   - target:
       kind: Deployment
       name: frontend
