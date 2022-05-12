@@ -2,12 +2,12 @@ resources:
   - ../../base
 patches:
   - target:
-      kind: Deployment
-      name: frontend
+      kind: Service
+      name: frontend-external
     patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
+      apiVersion: v1
+      kind: Service
       metadata:
-        name: frontend
+        name: frontend-external
         annotations:
           external-dns.alpha.kubernetes.io/hostname: store-dev.automateit.ca.
