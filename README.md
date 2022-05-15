@@ -1,7 +1,7 @@
 # swampUP 2022
 
 This repository contains the resources and artifacts for our swampUP 2022 talk "Accelerating Continuous delivery with DORA, Cloud Deploy and JFrog Pipelines" on May 26th, 2022
-
+See the [Application Repository](https://github.com/gdg-cloud-montreal/online-boutique) for application source and information
 ## Talk abstract
 
 In  session, we will tell a story of an imaginary company that wants to deliver high-quality software faster to their customers, yet something is holding it back. Our imaginary company learned about DORA assessments and discovered they are a medium-level performer among similar companies in the industry. They needed to improve several things, including automating their CI and CD processes, to go to the next level.
