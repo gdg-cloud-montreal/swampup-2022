@@ -6,5 +6,11 @@ description: Online Boutique delivery pipeline
 serialPipeline:
  stages:
  - targetId: swampup-2022-dev-cluster
+   profiles:
+   - dev
  - targetId: swampup-2022-stg-cluster
+   profiles:
+   - stg
  - targetId: swampup-2022-prod-cluster
+   profiles:
+   - prod

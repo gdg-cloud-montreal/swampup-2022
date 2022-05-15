@@ -1,0 +1,13 @@
+resources:
+  - ../../base
+patches:
+  - target:
+      kind: Service
+      name: frontend-external
+    patch: |-
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: frontend-external
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: store-stg.automateit.ca.

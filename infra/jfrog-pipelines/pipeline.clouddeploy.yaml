@@ -203,7 +203,7 @@ pipelines:
         environmentVariables:
             LOADGEN_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/loadgenerator:${res_loadgenerator_build_info_buildNumber}
             REGION: "us-central1"
-            CD_PIPELINE: "swampup-2022-boutique-ads"
+            CD_PIPELINE: "swampup-2022-boutique-loadgenerator"
         integrations:        
           - name: artifactory
           - name: gcloud
