@@ -246,6 +246,6 @@ spec:
 EOF
 
 kubectl annotate serviceaccount --namespace=external-dns ${service_accounts[$cluster]} \
-    "iam.gke.io/gcp-service-account=${service_accounts[$cluster]}@${gcp_project}.iam.gserviceaccount.com"
+    "iam.gke.io/gcp-service-account=${service_accounts[$cluster]}@${gcp_project[cluster]}.iam.gserviceaccount.com"
 done
 ```
