@@ -1,10 +1,11 @@
 # swampUP 2022
 
 This repository contains the resources and artifacts for our swampUP 2022 talk "Accelerating Continuous delivery with DORA, Cloud Deploy and JFrog Pipelines" on May 26th, 2022
+
 See the [Application Repository](https://github.com/gdg-cloud-montreal/online-boutique) for application source and information
 ## Talk abstract
 
-In  session, we will tell a story of an imaginary company that wants to deliver high-quality software faster to their customers, yet something is holding it back. Our imaginary company learned about DORA assessments and discovered they are a medium-level performer among similar companies in the industry. They needed to improve several things, including automating their CI and CD processes, to go to the next level.
+In  session, we tell a story of an imaginary company that wants to deliver high-quality software faster to their customers, yet something is holding it back. Our imaginary company learned about DORA assessments and discovered they are a medium-level performer among similar companies in the industry. They needed to improve several things, including automating their CI and CD processes, to go to the next level.
 
 Are you interested in learning how to use the DevOps Research and Assessment program (DORA) and new Cloud Native Solutions for CI/CD? Join our session and learn how to use the DORA program and see a demo of how managed CI/CD solutions like Google Cloud Deploy, JFrog Pipelines, and Artifactory help you implement modern microservices deployments on K8s and serverless platforms!
 
@@ -21,12 +22,12 @@ This repository is structured to contain application deployment information, and
 | Team                                                                          | Description                                                                | Components                                       |
 | ------------------------------------------------------------------------------| ---------------------------------------------------------------------------|--------------------------------------------------|
 | [Frontend Team](./online-boutique/application-manifests/frontend)             |Responsible for the build and deployment of UI Services                     |`frontend`                                        |
-| [Shopping Cart Team](./online-boutique/application-manifests/shoppingcart)    |Responsible for the build and deployment of shopping cart services.         | `cartservice`, `redis`                           |
-| [Products Team](./online-boutique/application-manifests/products)             |Responsible for the build and deployment of Product Catalog services        | `productcatalogservice`, `recommendationservice` |
+| [Shopping Cart Team](./online-boutique/application-manifests/shoppingcart)    |Responsible for the build and deployment of shopping cart services.         |`cartservice`,`redis`                             |
+| [Products Team](./online-boutique/application-manifests/products)             |Responsible for the build and deployment of Product Catalog services        |`productcatalogservice`,`recommendationservice`   | 
 | [Currency Team](./online-boutique/application-manifests/currency)             |Responsible for the build and deployment of Currency Converter              |`currencyservice`                                 |
 | [Checkout Team](./online-boutique/application-manifests/checkout)             |Responsible for the build and deployment of User Checkout services          |`checkoutservice`,`emailservice`,`paymentservice`,`shippingservice`  |
 | [Ad Team](./online-boutique/application-manifests/ads)                        |Responsible for the build and deployment of Text based Ad services          |`adservice`                                       |
-| [Loadgenerator Team ](./online-boutique/application-manifests/loadgenerator)  |Responsible for the build and deployment of synthetic load generation services. Used for Testing|`loadgenerator`                                                       |    
+| [Loadgenerator Team ](./online-boutique/application-manifests/loadgenerator)  |Responsible for the build and deployment of synthetic load generation services. Used for Testing|`loadgenerator`               |    
 
 
 Each team has a Cloud Deploy pipeline for their component, that can be triggered either via an update to the associated container image(s) or to the application deployment manifests in this repository.
@@ -43,7 +44,7 @@ Instructions for deploying thes clusters can be found in the [Infrastructure Dep
 
 ### Cloud Deploy Configurations
 
-Each cluster has an associated set of configurations for Cloud Deploy, that creates the cluster deployment target. These are defined in the [infra/cloud-deploy-pipelines](infra/cloud-deploy-pipelines/) folder
+Each cluster has an associated set of configurations for Cloud Deploy, that creates the cluster deployment target. These are defined in the [pipelines/cloud-deploy-pipelines](pipelines/cloud-deploy-pipelines/) folder
 
 **Example Cloud Deploy Target**
 
@@ -80,7 +81,7 @@ The `frontend` component uses the `kustomize` deployment type to allow for chang
 
 ### JFrog Pipelines Configuration
 
-In the [infra/jfrog-pipelines](infra/jfrog-pipelines/) folder are the configurations for the JFrog pipelines that are used to trigger the Cloud Deploy pipelines. These configurations include listners for both new container image versions and changes to the application manifests.
+In the [pipelines/jfrog-pipelines](pipelines/jfrog-pipelines/) folder are the configurations for the JFrog pipelines that are used to trigger the Cloud Deploy pipelines. These configurations include listeners for both new container image versions and changes to the application manifests.
 
 **Example JFrog Pipeline Resource**
 
@@ -94,7 +95,7 @@ In the [infra/jfrog-pipelines](infra/jfrog-pipelines/) folder are the configurat
         commit:                true
         pullRequestCreate:     true
       files:
-        include: ^online-boutique\/application-manifests\/loadgenerator\/.+
+        include: online-boutique/application-manifests/loadgenerator/*
 ```
 
 **Example JFrog Pipeline**
@@ -106,10 +107,6 @@ In the [infra/jfrog-pipelines](infra/jfrog-pipelines/) folder are the configurat
       type: bash
       configuration:
         affinityGroup: fmkGroup
-        environmentVariables:
-            LOADGEN_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/loadgenerator:${res_loadgenerator_build_info_buildNumber}
-            REGION: "us-central1"
-            CD_PIPELINE: "swampup-2022-boutique-loadgenerator"
         integrations: 
         #Permits access to the Artifactory Repository with our Container images      
           - name: artifactory
@@ -122,12 +119,17 @@ In the [infra/jfrog-pipelines](infra/jfrog-pipelines/) folder are the configurat
           - name: loadgeneratorservices_deployment_repo
         # triggers on new container build information
           - name: loadgenerator_build_info
+        environmentVariables:
+            LOADGEN_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/loadgenerator:${res_loadgenerator_build_info_buildNumber}
+            REGION: "us-central1"
+            CD_PIPELINE: "swampup-2022-boutique-loadgenerator"
       execution:
         # Sets up execution environment for Cloud Deploy, and creates a new Release
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
           - cd $res_loadgeneratorservices_deployment_repo_resourcePath/online-boutique
+        # Update the node image with the latest Google Cloud SDK  
           - > 
            gcloud components update --quiet 
         onExecute:

@@ -9,7 +9,7 @@ resources:
         commit:                true
         pullRequestCreate:     true
       files:
-        include: ^online-boutique\/application-manifests\/ads\/.+
+        include: online-boutique/application-manifests/ads/*
 
   - name: checkoutservices_deployment_repo
     type: GitRepo
@@ -30,7 +30,7 @@ resources:
         commit:                true
         pullRequestCreate:     true
       files:
-        include: ^online-boutique\/application-manifests\/currency\/.+
+        include: ^online-boutique/application-manifests/currency/*
   - name: frontendservices_deployment_repo
     type: GitRepo
     configuration:
@@ -40,7 +40,7 @@ resources:
         commit:                true
         pullRequestCreate:     true
       files:
-        include: ^online-boutique\/application-manifests\/frontend\/.+
+        include: online-boutique/application-manifests/frontend/*
   - name: productservices_deployment_repo
     type: GitRepo
     configuration:
@@ -50,7 +50,7 @@ resources:
         commit:                true
         pullRequestCreate:     true
       files:
-        include: ^online-boutique\/application-manifests\/products/*
+        include: online-boutique/application-manifests/products/*
   - name: shoppingcartservices_deployment_repo
     type: GitRepo
     configuration:
@@ -60,7 +60,7 @@ resources:
         commit:                true
         pullRequestCreate:     true
       files:
-        include: ^online-boutique\/application-manifests\/shoppingcart\/.+
+        include: online-boutique/application-manifests/shoppingcart/*
   - name: loadgeneratorservices_deployment_repo
     type: GitRepo
     configuration:
@@ -70,5 +70,5 @@ resources:
         commit:                true
         pullRequestCreate:     true
       files:
-        include: ^online-boutique\/application-manifests\/loadgenerator\/.+
+        include: online-boutique/application-manifests/loadgenerator/*
   
