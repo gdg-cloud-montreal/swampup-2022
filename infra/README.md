@@ -123,6 +123,8 @@ gcloud container clusters delete prod-cluster --region=${REGION}
 
 The following script configures the clusters, and gcp projects to use GKE workload identity to provide ExternalDNS with the permissions it needs to manage DNS records. Workload identity is the Google-recommended way to provide GKE workloads access to GCP APIs.
 
+Modify the cluster names, gcp project, domain, and cluster regions variables as needed.
+
 ```shell
 #!/bin/bash
 
@@ -158,17 +160,18 @@ for cluster in "${clusters[@]}"; do
 gcloud iam service-accounts create ${service_accounts[$cluster]} --display-name="${sa_display}"
 
 # Bind the ExternalDNS GSA to the DNS admin role.
-gcloud projects add-iam-policy-binding ${gcp_projects[$cluster]}\
-    --member="serviceAccount:${service_accounts[$cluster]}@${gcp_projects[$cluster]}.iam.gserviceaccount.com" --role=roles/dns.admin
-
+gcloud projects add-iam-policy-binding ${dns_project} \
+--member="serviceAccount:${service_accounts[$cluster]}@${gcp_projects[$cluster]}.iam.gserviceaccount.com"  \
+--role=roles/dns.admin
 
 # Link the ExternalDNS GSA to the Kubernetes service account (KSA) that
 # external-dns will run under, i.e., the external-dns KSA in the external-dns
 # namespaces.
-gcloud iam service-accounts add-iam-policy-binding ${service_accounts[$cluster]}@${gcp_projects[$cluster]}.iam.gserviceaccount.com\
-    --member="serviceAccount:${gcp_projects[$cluster]}.svc.id.goog[external-dns/${service_accounts[$cluster]}]" \
-    --role=roles/iam.workloadIdentityUser \
-    --project=$dns_project
+gcloud iam service-accounts add-iam-policy-binding ${service_accounts[$cluster]}@${gcp_projects[$cluster]}.iam.gserviceaccount.com \
+--member="serviceAccount:${gcp_projects[$cluster]}.svc.id.goog[external-dns/${service_accounts[$cluster]}]" \
+--role=roles/iam.workloadIdentityUser \
+--project=${gcp_projects[$cluster]}
+
 
 gcloud container clusters get-credentials  ${cluster} --project ${gcp_projects[$cluster]} --region ${cluster_regions[$cluster]}
 
@@ -246,6 +249,7 @@ spec:
 EOF
 
 kubectl annotate serviceaccount --namespace=external-dns ${service_accounts[$cluster]} \
-    "iam.gke.io/gcp-service-account=${service_accounts[$cluster]}@${gcp_project[cluster]}.iam.gserviceaccount.com"
+"iam.gke.io/gcp-service-account=${service_accounts[$cluster]}@${gcp_projects[$cluster]}.iam.gserviceaccount.com"
+
 done
 ```
