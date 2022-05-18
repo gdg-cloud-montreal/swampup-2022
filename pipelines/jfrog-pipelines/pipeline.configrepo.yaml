@@ -9,7 +9,7 @@ resources:
         commit:                true
         pullRequestCreate:     true
       files:
-        include: online-boutique/application-manifests/ads/*
+        include: application-manifests/online-boutique/ads/*
 
   - name: checkoutservices_deployment_repo
     type: GitRepo
@@ -20,7 +20,7 @@ resources:
         commit:                true
         pullRequestCreate:     true
       files:
-        include: application-manifests/checkout/*
+        include: application-manifests/online-boutique/checkout/*
   - name: currencyservices_deployment_repo
     type: GitRepo
     configuration:
@@ -30,7 +30,7 @@ resources:
         commit:                true
         pullRequestCreate:     true
       files:
-        include: ^online-boutique/application-manifests/currency/*
+        include: application-manifests/online-boutique/currency/*
   - name: frontendservices_deployment_repo
     type: GitRepo
     configuration:
@@ -40,7 +40,7 @@ resources:
         commit:                true
         pullRequestCreate:     true
       files:
-        include: online-boutique/application-manifests/frontend/*
+        include: application-manifests/online-boutique/frontend/*
   - name: productservices_deployment_repo
     type: GitRepo
     configuration:
@@ -50,7 +50,7 @@ resources:
         commit:                true
         pullRequestCreate:     true
       files:
-        include: online-boutique/application-manifests/products/*
+        include: application-manifests/online-boutique/products/*
   - name: shoppingcartservices_deployment_repo
     type: GitRepo
     configuration:
@@ -60,7 +60,7 @@ resources:
         commit:                true
         pullRequestCreate:     true
       files:
-        include: online-boutique/application-manifests/shoppingcart/*
+        include: application-manifests/online-boutique/shoppingcart/*
   - name: loadgeneratorservices_deployment_repo
     type: GitRepo
     configuration:
@@ -70,5 +70,5 @@ resources:
         commit:                true
         pullRequestCreate:     true
       files:
-        include: online-boutique/application-manifests/loadgenerator/*
+        include: application-manifests/online-boutique/loadgenerator/*
   
