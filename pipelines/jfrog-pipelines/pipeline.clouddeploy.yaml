@@ -45,7 +45,7 @@ pipelines:
             SHIPPING_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/shippingservice:${res_shippingsvc_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-checkout"
-            APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
+            APP_DIR: $res_checkoutservices_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
         integrations:        
           - name: artifactory
@@ -80,7 +80,7 @@ pipelines:
             CURRENCY_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/currencyservice:${res_currencysvc_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-currency"
-            APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
+            APP_DIR: $res_currencyservices_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')            
         integrations:        
           - name: artifactory
@@ -112,7 +112,7 @@ pipelines:
             FRONTEND_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/frontend:${res_frontend_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-frontend"
-            APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
+            APP_DIR: $res_frontendservices_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
         integrations:        
           - name: artifactory
@@ -145,7 +145,7 @@ pipelines:
             RECOMMENDATION_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/recommendationservice:${res_recommendationsvc_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-products"
-            APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
+            APP_DIR: $res_productservices_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
         integrations:        
           - name: artifactory
@@ -178,7 +178,7 @@ pipelines:
             CART_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/cartservice:${res_cartsvc_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-shoppingcart"
-            APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
+            APP_DIR: $res_shoppingcartservices_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
         integrations:        
           - name: artifactory
@@ -210,7 +210,7 @@ pipelines:
             LOADGEN_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/loadgenerator:${res_loadgenerator_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-loadgenerator"
-            APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
+            APP_DIR: $res_loadgeneratorservices_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
         integrations:        
           - name: artifactory
