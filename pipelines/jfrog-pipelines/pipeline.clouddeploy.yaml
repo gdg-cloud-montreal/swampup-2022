@@ -35,7 +35,7 @@ pipelines:
            --region $REGION
            --images=adservice=$AD_SVC_IMAGE
            --source ads/
-           --annotations=commitSHA=${COMMIT_SHA},commiter=${COMMITER_LOGIN}
+           --annotations=commitSHA=${COMMIT_SHA},commiter=${COMMITER}
   - name: deploy_checkoutservices_pipeline
     steps:
     - name: trigger_cloud_deploy_checkoutservices
