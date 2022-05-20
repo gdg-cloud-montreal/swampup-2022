@@ -216,7 +216,6 @@ pipelines:
             CD_PIPELINE: "swampup-2022-boutique-loadgenerator"
             APP_DIR: $res_loadgeneratorservices_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
-            COMMITER: 
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -237,4 +236,3 @@ pipelines:
            --region $REGION 
            --images=loadgenerator=$LOADGEN_SVC_IMAGE 
            --source loadgenerator/
-           --annotations
