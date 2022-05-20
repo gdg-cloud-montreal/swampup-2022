@@ -48,7 +48,7 @@ spec:
               port: 8080
               httpHeaders:
               - name: "Cookie"
-                value: "shop_session-id=x-liveness-probe"
+                value: "shop_session-id=x-liveness-probe"cd o
           env:
           - name: PORT
             value: "8080"
