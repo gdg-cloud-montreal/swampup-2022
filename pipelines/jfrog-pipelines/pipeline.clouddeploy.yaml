@@ -10,6 +10,8 @@ pipelines:
             AD_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/adservice:${res_adsvc_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-ads"
+            APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
+            REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -20,8 +22,7 @@ pipelines:
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
-          - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
-          - cd $res_adsvc_deployment_repo_resourcePath/online-boutique
+          - cd $APP_DIR
           - > 
            gcloud components update --quiet 
         onExecute:
@@ -30,7 +31,7 @@ pipelines:
            --delivery-pipeline $CD_PIPELINE
            --region $REGION
            --images=adservice=$AD_SVC_IMAGE
-           --source application-manifests/ads/
+           --source ads/
   - name: deploy_checkoutservices_pipeline
     steps:
     - name: trigger_cloud_deploy_checkoutservices
@@ -44,6 +45,8 @@ pipelines:
             SHIPPING_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/shippingservice:${res_shippingsvc_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-checkout"
+            APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
+            REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -57,8 +60,7 @@ pipelines:
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
-          - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
-          - cd $res_checkoutservices_deployment_repo_resourcePath/online-boutique
+          - cd $APP_DIR
           - > 
            gcloud components update --quiet 
         onExecute:
@@ -67,7 +69,7 @@ pipelines:
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images=checkoutservice=$CHECKOUT_SVC_IMAGE,emailservice=$EMAIL_SVC_IMAGE,paymentservice=$PAYMENT_SVC_IMAGE,shippingservice=$SHIPPING_SVC_IMAGE 
-           --source application-manifests/checkout/
+           --source checkout/
   - name: deploy_currencyservices_pipeline
     steps:
     - name: trigger_cloud_deploy_currencyservice
@@ -78,6 +80,8 @@ pipelines:
             CURRENCY_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/currencyservice:${res_currencysvc_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-currency"
+            APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
+            REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')            
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -88,8 +92,7 @@ pipelines:
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
-          - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
-          - cd $res_currencyservices_deployment_repo_resourcePath/online-boutique
+          - cd $APP_DIR
           - > 
            gcloud components update --quiet 
         onExecute:
@@ -98,7 +101,7 @@ pipelines:
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images=currencyservice=$CURRENCY_SVC_IMAGE 
-           --source application-manifests/currency/
+           --source currency/
   - name: deploy_frontend_pipeline
     steps:
     - name: trigger_cloud_deploy_frontend
@@ -109,6 +112,8 @@ pipelines:
             FRONTEND_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/frontend:${res_frontend_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-frontend"
+            APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
+            REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -119,8 +124,7 @@ pipelines:
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
-          - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
-          - cd $res_frontendservices_deployment_repo_resourcePath/online-boutique
+          - cd $APP_DIR
           - > 
            gcloud components update --quiet 
         onExecute:
@@ -129,7 +133,7 @@ pipelines:
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images=frontend=$FRONTEND_SVC_IMAGE 
-           --source application-manifests/frontend/
+           --source frontend/
   - name: deploy_productservices_pipeline
     steps:
     - name: trigger_cloud_deploy_productservices
@@ -141,6 +145,8 @@ pipelines:
             RECOMMENDATION_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/recommendationservice:${res_recommendationsvc_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-products"
+            APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
+            REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -152,8 +158,7 @@ pipelines:
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
-          - export REL_TIMESTAMP=$(date '+%Y%m%d%H%S')
-          - cd $res_productservices_deployment_repo_resourcePath/online-boutique
+          - cd $APP_DIR
           - > 
            gcloud components update --quiet 
         onExecute:
@@ -162,7 +167,7 @@ pipelines:
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images=productcatalogservice=$PRODUCTCATALOG_SVC_IMAGE,recommendationservice=$RECOMMENDATION_SVC_IMAGE 
-           --source application-manifests/products/
+           --source products/
   - name: deploy_shoppingcartservices_pipeline
     steps:
     - name: trigger_cloud_deploy_shoppingcart
@@ -173,6 +178,8 @@ pipelines:
             CART_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/cartservice:${res_cartsvc_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-shoppingcart"
+            APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
+            REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -183,8 +190,7 @@ pipelines:
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
-          - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
-          - cd $res_shoppingcartservices_deployment_repo_resourcePath/online-boutique
+          - cd $APP_DIR
           - > 
            gcloud components update --quiet 
         onExecute:
@@ -193,7 +199,7 @@ pipelines:
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images=cartservice=$CART_SVC_IMAGE 
-           --source application-manifests/shoppingcart/
+           --source shoppingcart/
   - name: deploy_loadgenerator_pipeline
     steps:
     - name: trigger_cloud_deploy_loadgenerator
@@ -204,6 +210,8 @@ pipelines:
             LOADGEN_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/loadgenerator:${res_loadgenerator_build_info_buildNumber}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-loadgenerator"
+            APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
+            REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -214,8 +222,7 @@ pipelines:
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
-          - export REL_TIMESTAMP=$(date '+%Y%m%d-%H%S')
-          - cd $res_loadgeneratorservices_deployment_repo_resourcePath/online-boutique
+          - cd $APP_DIR
           - > 
            gcloud components update --quiet 
         onExecute:
@@ -224,6 +231,4 @@ pipelines:
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
            --images=loadgenerator=$LOADGEN_SVC_IMAGE 
-           --source application-manifests/loadgenerator/
-
-
+           --source loadgenerator/
