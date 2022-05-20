@@ -12,11 +12,14 @@ pipelines:
             CD_PIPELINE: "swampup-2022-boutique-ads"
             APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
+            COMMITER: $res_ads_propertybag_commiterLogin
+            COMMIT_SHA: $res_ads_propertybag_commitSHA
         integrations:        
           - name: artifactory
           - name: gcloud
           - name: server_name
         inputResources:
+          - name: ads_propertybag
           - name: adsvc_deployment_repo
           - name: adsvc_build_info
       execution:
@@ -32,6 +35,7 @@ pipelines:
            --region $REGION
            --images=adservice=$AD_SVC_IMAGE
            --source ads/
+           --annotations=commitSHA=${COMMIT_SHA},commiter=${COMMITER_LOGIN}
   - name: deploy_checkoutservices_pipeline
     steps:
     - name: trigger_cloud_deploy_checkoutservices
@@ -212,6 +216,7 @@ pipelines:
             CD_PIPELINE: "swampup-2022-boutique-loadgenerator"
             APP_DIR: $res_loadgeneratorservices_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
+            COMMITER: 
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -232,3 +237,4 @@ pipelines:
            --region $REGION 
            --images=loadgenerator=$LOADGEN_SVC_IMAGE 
            --source loadgenerator/
+           --annotations
