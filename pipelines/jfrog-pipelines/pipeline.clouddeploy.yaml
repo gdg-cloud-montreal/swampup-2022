@@ -25,10 +25,10 @@ pipelines:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
-          - > 
+          - | 
             gcloud components update --quiet 
         onExecute:
-          - >
+          - |
             gcloud deploy releases create adsvc-${REL_TIMESTAMP} \
             --delivery-pipeline $CD_PIPELINE \
             --region $REGION \
@@ -63,10 +63,10 @@ pipelines:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
-          - > 
+          - | 
             gcloud components update --quiet 
         onExecute:
-          - >
+          - |
             gcloud deploy releases create currency-${REL_TIMESTAMP} \
             --delivery-pipeline $CD_PIPELINE \
             --region $REGION \
@@ -101,10 +101,10 @@ pipelines:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
-          - > 
+          - | 
             gcloud components update --quiet 
         onExecute:
-          - >
+          - |
             gcloud deploy releases create frontend-${REL_TIMESTAMP} \
             --delivery-pipeline $CD_PIPELINE \
             --region $REGION \
@@ -139,10 +139,10 @@ pipelines:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
-          - > 
+          - | 
             gcloud components update --quiet 
         onExecute:
-          - >
+          - |
             gcloud deploy releases create shoppingcart-${REL_TIMESTAMP} \
             --delivery-pipeline $CD_PIPELINE \
             --region $REGION \
@@ -177,10 +177,10 @@ pipelines:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
-          - > 
+          - | 
             gcloud components update --quiet 
         onExecute:
-          - >
+          - |
             gcloud deploy releases create loadgenerator-${REL_TIMESTAMP} \
             --delivery-pipeline $CD_PIPELINE \
             --region $REGION \
@@ -219,10 +219,10 @@ pipelines:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
-          - > 
+          - | 
             gcloud components update --quiet 
         onExecute:
-          - >
+          - |
             gcloud deploy releases create productsvc-${REL_TIMESTAMP} \
             --delivery-pipeline $CD_PIPELINE \
             --region $REGION \
@@ -272,10 +272,10 @@ pipelines:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
-          - > 
+          - | 
             gcloud components update --quiet 
         onExecute:
-          - >
+          - |
             gcloud deploy releases create checkoutsvc-${REL_TIMESTAMP} \
             --delivery-pipeline $CD_PIPELINE \
             --region $REGION \
