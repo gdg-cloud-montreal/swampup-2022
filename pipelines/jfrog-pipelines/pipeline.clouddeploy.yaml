@@ -7,13 +7,13 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            AD_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/adservice:${res_adsvc_build_info_buildNumber}
+            AD_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/adservice:${$res_ads_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-ads"
             APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
             COMMITER: $res_ads_propertybag_commiterLogin
-            COMMIT_SHA: $res_ads_propertybag_commitSHA
+            COMMIT_SHA: $res_ads_propertybag_commitSha
         integrations:        
           - name: artifactory
           - name: gcloud
@@ -21,7 +21,6 @@ pipelines:
         inputResources:
           - name: ads_propertybag
           - name: adsvc_deployment_repo
-          - name: adsvc_build_info
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
@@ -36,44 +35,6 @@ pipelines:
            --images=adservice=$AD_SVC_IMAGE
            --source ads/
            --annotations=commitSHA=${COMMIT_SHA},commiter=${COMMITER}
-  - name: deploy_checkoutservices_pipeline
-    steps:
-    - name: trigger_cloud_deploy_checkoutservices
-      type: bash
-      configuration:
-        affinityGroup: fmkGroup
-        environmentVariables:
-            CHECKOUT_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/checkoutservice:${res_checkoutsvc_build_info_buildNumber}
-            EMAIL_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/emailservice:${res_emailsvc_build_info_buildNumber}
-            PAYMENT_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/paymentservice:${res_paymentsvc_build_info_buildNumber}
-            SHIPPING_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/shippingservice:${res_shippingsvc_build_info_buildNumber}
-            REGION: "us-central1"
-            CD_PIPELINE: "swampup-2022-boutique-checkout"
-            APP_DIR: $res_checkoutservices_deployment_repo_resourcePath/application-manifests/online-boutique
-            REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
-        integrations:        
-          - name: artifactory
-          - name: gcloud
-          - name: server_name
-        inputResources:
-          - name: checkoutservices_deployment_repo
-          - name: checkoutsvc_build_info
-          - name: emailsvc_build_info
-          - name: paymentsvc_build_info
-          - name: shippingsvc_build_info
-      execution:
-        onStart:
-          - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
-          - cd $APP_DIR
-          - > 
-           gcloud components update --quiet 
-        onExecute:
-          - >
-           gcloud deploy releases create checkoutsvc-${REL_TIMESTAMP} 
-           --delivery-pipeline $CD_PIPELINE 
-           --region $REGION 
-           --images=checkoutservice=$CHECKOUT_SVC_IMAGE,emailservice=$EMAIL_SVC_IMAGE,paymentservice=$PAYMENT_SVC_IMAGE,shippingservice=$SHIPPING_SVC_IMAGE 
-           --source checkout/
   - name: deploy_currencyservices_pipeline
     steps:
     - name: trigger_cloud_deploy_currencyservice
@@ -81,18 +42,20 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            CURRENCY_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/currencyservice:${res_currencysvc_build_info_buildNumber}
+            CURRENCY_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/currencyservice:${$res_currency_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-currency"
             APP_DIR: $res_currencyservices_deployment_repo_resourcePath/application-manifests/online-boutique
-            REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')            
+            REL_TIMESTAMP: $(date '+%Y%m%d-%H%S') 
+            COMMITER: $res_currency_propertybag_commiterLogin
+            COMMIT_SHA: $res_currency_propertybag_commitSha           
         integrations:        
           - name: artifactory
           - name: gcloud
           - name: server_name
         inputResources:
           - name: currencyservices_deployment_repo
-          - name: currencysvc_build_info
+          - name: currency_propertybag
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
@@ -106,6 +69,7 @@ pipelines:
            --region $REGION 
            --images=currencyservice=$CURRENCY_SVC_IMAGE 
            --source currency/
+           --annotations=commitSHA=${COMMIT_SHA},commiter=${COMMITER}
   - name: deploy_frontend_pipeline
     steps:
     - name: trigger_cloud_deploy_frontend
@@ -113,18 +77,20 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            FRONTEND_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/frontend:${res_frontend_build_info_buildNumber}
+            FRONTEND_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/frontend:${$res_frontend_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-frontend"
             APP_DIR: $res_frontendservices_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
+            COMMITER: $res_frontend_propertybag_commiterLogin
+            COMMIT_SHA: $res_frontend_propertybag_commitSha
         integrations:        
           - name: artifactory
           - name: gcloud
           - name: server_name
         inputResources:
           - name: frontendservices_deployment_repo
-          - name: frontend_build_info
+          - name: frontend_propertybag
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
@@ -138,40 +104,7 @@ pipelines:
            --region $REGION 
            --images=frontend=$FRONTEND_SVC_IMAGE 
            --source frontend/
-  - name: deploy_productservices_pipeline
-    steps:
-    - name: trigger_cloud_deploy_productservices
-      type: bash
-      configuration:
-        affinityGroup: fmkGroup
-        environmentVariables:
-            PRODUCTCATALOG_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/productcatalogservice:${res_productcatalogsvc_build_info_buildNumber}
-            RECOMMENDATION_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/recommendationservice:${res_recommendationsvc_build_info_buildNumber}
-            REGION: "us-central1"
-            CD_PIPELINE: "swampup-2022-boutique-products"
-            APP_DIR: $res_productservices_deployment_repo_resourcePath/application-manifests/online-boutique
-            REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
-        integrations:        
-          - name: artifactory
-          - name: gcloud
-          - name: server_name
-        inputResources:
-          - name: productservices_deployment_repo
-          - name: productcatalogsvc_build_info
-          - name: recommendationsvc_build_info
-      execution:
-        onStart:
-          - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
-          - cd $APP_DIR
-          - > 
-           gcloud components update --quiet 
-        onExecute:
-          - >
-           gcloud deploy releases create productsvc-${REL_TIMESTAMP} 
-           --delivery-pipeline $CD_PIPELINE 
-           --region $REGION 
-           --images=productcatalogservice=$PRODUCTCATALOG_SVC_IMAGE,recommendationservice=$RECOMMENDATION_SVC_IMAGE 
-           --source products/
+           --annotations=commitSHA=${COMMIT_SHA},commiter=${COMMITER} 
   - name: deploy_shoppingcartservices_pipeline
     steps:
     - name: trigger_cloud_deploy_shoppingcart
@@ -179,18 +112,20 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            CART_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/cartservice:${res_cartsvc_build_info_buildNumber}
+            CART_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/cartservice:${$res_cart_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-shoppingcart"
             APP_DIR: $res_shoppingcartservices_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
+            COMMITER: $res_cart_propertybag_commiterLogin
+            COMMIT_SHA: $res_cart_propertybag_commitSha 
         integrations:        
           - name: artifactory
           - name: gcloud
           - name: server_name
         inputResources:
           - name: shoppingcartservices_deployment_repo
-          - name: cartsvc_build_info
+          - name: cart_propertybag
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
@@ -204,6 +139,7 @@ pipelines:
            --region $REGION 
            --images=cartservice=$CART_SVC_IMAGE 
            --source shoppingcart/
+           --annotations=commitSHA=${COMMIT_SHA},commiter=${COMMITER}
   - name: deploy_loadgenerator_pipeline
     steps:
     - name: trigger_cloud_deploy_loadgenerator
@@ -211,18 +147,20 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            LOADGEN_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/loadgenerator:${res_loadgenerator_build_info_buildNumber}
+            LOADGEN_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/loadgenerator:${$res_load_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-loadgenerator"
             APP_DIR: $res_loadgeneratorservices_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
+            COMMITER: $res_load_propertybag_commiterLogin
+            COMMIT_SHA: $res_load_propertybag_commitSha
         integrations:        
           - name: artifactory
           - name: gcloud
           - name: server_name
         inputResources:
           - name: loadgeneratorservices_deployment_repo
-          - name: loadgenerator_build_info
+          - name: load_propertybag
       execution:
         onStart:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
@@ -236,3 +174,97 @@ pipelines:
            --region $REGION 
            --images=loadgenerator=$LOADGEN_SVC_IMAGE 
            --source loadgenerator/
+           --annotations=commitSHA=${COMMIT_SHA},commiter=${COMMITER}
+  - name: deploy_productservices_pipeline
+    steps:
+    - name: trigger_cloud_deploy_productservices
+      type: bash
+      configuration:
+        affinityGroup: fmkGroup
+        environmentVariables:
+            PRODUCTCATALOG_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/productcatalogservice:${res_product_propertybag_imageTag}
+            RECOMMENDATION_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/recommendationservice:${res_recommendations_propertybag_imageTag}}
+            REGION: "us-central1"
+            CD_PIPELINE: "swampup-2022-boutique-products"
+            APP_DIR: $res_productservices_deployment_repo_resourcePath/application-manifests/online-boutique
+            REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
+            PRODUCT_COMMITER: $res_product_propertybag_commiterLogin
+            PRODUCT_COMMIT_SHA: $res_product_propertybag_commitSha  
+            RECOMMENDATIONS_COMMITER: $res_recommendations_propertybag_commiterLogin
+            RECOMMENDATIONS_CCOMMIT_SHA: $res_recommendations_propertybag_commitSha    
+        integrations:        
+          - name: artifactory
+          - name: gcloud
+          - name: server_name
+        inputResources:
+          - name: productservices_deployment_repo
+          - name: product_propertybag
+          - name: recommendations_propertybag
+      execution:
+        onStart:
+          - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
+          - cd $APP_DIR
+          - > 
+           gcloud components update --quiet 
+        onExecute:
+          - >
+           gcloud deploy releases create productsvc-${REL_TIMESTAMP} 
+           --delivery-pipeline $CD_PIPELINE 
+           --region $REGION 
+           --images=productcatalogservice=$PRODUCTCATALOG_SVC_IMAGE,recommendationservice=$RECOMMENDATION_SVC_IMAGE 
+           --source products/
+           --annotations=Product_commitSHA=${PRODUCT_COMMIT_SHA},Product_commiter=${PRODUCT_COMMITER},Recommendations_commitSHA=${RECOMMENDATIONS_COMMIT_SHA},Recommendations__commiter=${RECOMMENDATIONS_COMMITER}
+  - name: deploy_checkoutservices_pipeline
+    steps:
+    - name: trigger_cloud_deploy_checkoutservices
+      type: bash
+      configuration:
+        affinityGroup: fmkGroup
+        environmentVariables:
+            CHECKOUT_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/checkoutservice:${res_checkout_propertybag_imageTag}
+            EMAIL_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/emailservice:${res_email_propertybag_imageTag}
+            PAYMENT_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/paymentservice:${res_payment_propertybag_imageTag}
+            SHIPPING_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/shippingservice:${res_shipping_propertybag_imageTag}
+            REGION: "us-central1"
+            CD_PIPELINE: "swampup-2022-boutique-checkout"
+            APP_DIR: $res_checkoutservices_deployment_repo_resourcePath/application-manifests/online-boutique
+            REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
+            CHECKOUT_COMMITER: $res_checkout_propertybag_commiterLogin
+            CHECKOUT_COMMIT_SHA: $res_checkoutt_propertybag_commitSha  
+            EMAIL_COMMITER: $res_email_propertybag_commiterLogin
+            EMAIL_CCOMMIT_SHA: $res_email_propertybag_commitSha
+            PAYMENT_COMMITER: $res_payment_propertybag_commiterLogin
+            PAYMENT_COMMIT_SHA: $res_payment_propertybag_commitSha  
+            SHIPPING_COMMITER: $res_shipping_propertybag_commiterLogin
+            SHIPPING_CCOMMIT_SHA: $res_shipping_propertybag_commitSha  
+        integrations:        
+          - name: artifactory
+          - name: gcloud
+          - name: server_name
+        inputResources:
+          - name: checkoutservices_deployment_repo
+          - name: checkout_propertybag
+          - name: email_propertybag
+          - name: payment_propertybag
+          - name: shipping_propertybag
+      execution:
+        onStart:
+          - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
+          - cd $APP_DIR
+          - > 
+           gcloud components update --quiet 
+        onExecute:
+          - >
+           gcloud deploy releases create checkoutsvc-${REL_TIMESTAMP} 
+           --delivery-pipeline $CD_PIPELINE 
+           --region $REGION 
+           --images=checkoutservice=$CHECKOUT_SVC_IMAGE,emailservice=$EMAIL_SVC_IMAGE,paymentservice=$PAYMENT_SVC_IMAGE,shippingservice=$SHIPPING_SVC_IMAGE 
+           --source checkout/
+           --annotations=Checkout_commitSHA=${CHECKOUT_COMMIT_SHA},
+           Checkout_commiter=$CHECKOUT_COMMITER},
+           Email_commitSHA=${EMAIL_COMMIT_SHA},
+           Email_commiter=${EMAIL_COMMITER},
+           Payment_commitSHA=${PAYMENT_COMMIT_SHA},
+           Payment_commiter=${PAYMENT_COMMITER},
+           Shipping_commitSHA=${SHIPPING_COMMIT_SHA},
+           Shipping_commiter=${SHIPPING_COMMITER}
