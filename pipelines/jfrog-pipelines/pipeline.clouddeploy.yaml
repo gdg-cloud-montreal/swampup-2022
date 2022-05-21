@@ -7,7 +7,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            AD_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/adservice:${$res_ads_propertybag_imageTag}
+            AD_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/adservice:${res_ads_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-ads"
             APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
@@ -34,7 +34,8 @@ pipelines:
            --region $REGION
            --images=adservice=$AD_SVC_IMAGE
            --source ads/
-           --annotations=commitSHA=${COMMIT_SHA},commiter=${COMMITER}
+           --annotations=commitSHA=${COMMIT_SHA},
+           commiter=${COMMITER}
   - name: deploy_currencyservices_pipeline
     steps:
     - name: trigger_cloud_deploy_currencyservice
@@ -42,7 +43,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            CURRENCY_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/currencyservice:${$res_currency_propertybag_imageTag}
+            CURRENCY_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/currencyservice:${res_currency_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-currency"
             APP_DIR: $res_currencyservices_deployment_repo_resourcePath/application-manifests/online-boutique
@@ -69,7 +70,8 @@ pipelines:
            --region $REGION 
            --images=currencyservice=$CURRENCY_SVC_IMAGE 
            --source currency/
-           --annotations=commitSHA=${COMMIT_SHA},commiter=${COMMITER}
+           --annotations=commitSHA=${COMMIT_SHA},
+           commiter=${COMMITER}
   - name: deploy_frontend_pipeline
     steps:
     - name: trigger_cloud_deploy_frontend
@@ -77,7 +79,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            FRONTEND_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/frontend:${$res_frontend_propertybag_imageTag}
+            FRONTEND_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/frontend:${res_frontend_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-frontend"
             APP_DIR: $res_frontendservices_deployment_repo_resourcePath/application-manifests/online-boutique
@@ -104,7 +106,8 @@ pipelines:
            --region $REGION 
            --images=frontend=$FRONTEND_SVC_IMAGE 
            --source frontend/
-           --annotations=commitSHA=${COMMIT_SHA},commiter=${COMMITER} 
+           --annotations=commitSHA=${COMMIT_SHA},
+           commiter=${COMMITER} 
   - name: deploy_shoppingcartservices_pipeline
     steps:
     - name: trigger_cloud_deploy_shoppingcart
@@ -112,7 +115,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            CART_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/cartservice:${$res_cart_propertybag_imageTag}
+            CART_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/cartservice:${res_cart_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-shoppingcart"
             APP_DIR: $res_shoppingcartservices_deployment_repo_resourcePath/application-manifests/online-boutique
@@ -139,7 +142,8 @@ pipelines:
            --region $REGION 
            --images=cartservice=$CART_SVC_IMAGE 
            --source shoppingcart/
-           --annotations=commitSHA=${COMMIT_SHA},commiter=${COMMITER}
+           --annotations=commitSHA=${COMMIT_SHA},
+           commiter=${COMMITER}
   - name: deploy_loadgenerator_pipeline
     steps:
     - name: trigger_cloud_deploy_loadgenerator
@@ -147,7 +151,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            LOADGEN_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/loadgenerator:${$res_load_propertybag_imageTag}
+            LOADGEN_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/loadgenerator:${res_load_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-loadgenerator"
             APP_DIR: $res_loadgeneratorservices_deployment_repo_resourcePath/application-manifests/online-boutique
@@ -174,7 +178,8 @@ pipelines:
            --region $REGION 
            --images=loadgenerator=$LOADGEN_SVC_IMAGE 
            --source loadgenerator/
-           --annotations=commitSHA=${COMMIT_SHA},commiter=${COMMITER}
+           --annotations=commitSHA=${COMMIT_SHA},
+           commiter=${COMMITER}
   - name: deploy_productservices_pipeline
     steps:
     - name: trigger_cloud_deploy_productservices
@@ -183,7 +188,7 @@ pipelines:
         affinityGroup: fmkGroup
         environmentVariables:
             PRODUCTCATALOG_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/productcatalogservice:${res_product_propertybag_imageTag}
-            RECOMMENDATION_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/recommendationservice:${res_recommendations_propertybag_imageTag}}
+            RECOMMENDATION_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/recommendationservice:${res_recommendations_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-products"
             APP_DIR: $res_productservices_deployment_repo_resourcePath/application-manifests/online-boutique
@@ -211,9 +216,13 @@ pipelines:
            gcloud deploy releases create productsvc-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
-           --images=productcatalogservice=$PRODUCTCATALOG_SVC_IMAGE,recommendationservice=$RECOMMENDATION_SVC_IMAGE 
+           --images=productcatalogservice=$PRODUCTCATALOG_SVC_IMAGE,
+           recommendationservice=$RECOMMENDATION_SVC_IMAGE 
            --source products/
-           --annotations=Product_commitSHA=${PRODUCT_COMMIT_SHA},Product_commiter=${PRODUCT_COMMITER},Recommendations_commitSHA=${RECOMMENDATIONS_COMMIT_SHA},Recommendations__commiter=${RECOMMENDATIONS_COMMITER}
+           --annotations=Product_commitSHA=${PRODUCT_COMMIT_SHA},
+           Product_commiter=${PRODUCT_COMMITER},
+           Recommendations_commitSHA=${RECOMMENDATIONS_COMMIT_SHA},
+           Recommendations_commiter=${RECOMMENDATIONS_COMMITER}
   - name: deploy_checkoutservices_pipeline
     steps:
     - name: trigger_cloud_deploy_checkoutservices
@@ -258,7 +267,10 @@ pipelines:
            gcloud deploy releases create checkoutsvc-${REL_TIMESTAMP} 
            --delivery-pipeline $CD_PIPELINE 
            --region $REGION 
-           --images=checkoutservice=$CHECKOUT_SVC_IMAGE,emailservice=$EMAIL_SVC_IMAGE,paymentservice=$PAYMENT_SVC_IMAGE,shippingservice=$SHIPPING_SVC_IMAGE 
+           --images=checkoutservice=$CHECKOUT_SVC_IMAGE,
+           emailservice=$EMAIL_SVC_IMAGE,
+           paymentservice=$PAYMENT_SVC_IMAGE,
+           shippingservice=$SHIPPING_SVC_IMAGE 
            --source checkout/
            --annotations=Checkout_commitSHA=${CHECKOUT_COMMIT_SHA},
            Checkout_commiter=$CHECKOUT_COMMITER},
