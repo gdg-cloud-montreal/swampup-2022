@@ -26,15 +26,15 @@ pipelines:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
           - > 
-           gcloud components update --quiet 
+          gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create adsvc-${REL_TIMESTAMP}  
-          --delivery-pipeline $CD_PIPELINE
-          --region $REGION
+          gcloud deploy releases create adsvc-${REL_TIMESTAMP} \
+          --delivery-pipeline $CD_PIPELINE \
+          --region $REGION \
           --images=\
-          adservice=$AD_SVC_IMAGE
-          --source ads/
+          adservice=$AD_SVC_IMAGE \
+          --source ads/ \
           --annotations=\
           commitSHA=${COMMIT_SHA},\
           commiter=${COMMITER}
@@ -64,15 +64,15 @@ pipelines:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
           - > 
-           gcloud components update --quiet 
+          gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create currency-${REL_TIMESTAMP} 
-          --delivery-pipeline $CD_PIPELINE 
-          --region $REGION 
+          gcloud deploy releases create currency-${REL_TIMESTAMP} \
+          --delivery-pipeline $CD_PIPELINE \
+          --region $REGION \
           --images=\
-          currencyservice=$CURRENCY_SVC_IMAGE 
-          --source currency/
+          currencyservice=$CURRENCY_SVC_IMAGE \
+          --source currency/ \
           --annotations=\
           commitSHA=${COMMIT_SHA},\
           commiter=${COMMITER}
@@ -102,15 +102,15 @@ pipelines:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
           - > 
-           gcloud components update --quiet 
+          gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create frontend-${REL_TIMESTAMP} 
-          --delivery-pipeline $CD_PIPELINE 
-          --region $REGION 
+          gcloud deploy releases create frontend-${REL_TIMESTAMP} \
+          --delivery-pipeline $CD_PIPELINE \
+          --region $REGION \
           --images=\
-          frontend=$FRONTEND_SVC_IMAGE 
-          --source frontend/
+          frontend=$FRONTEND_SVC_IMAGE \
+          --source frontend/ \
           --annotations=\
           commitSHA=${COMMIT_SHA},\
           commiter=${COMMITER} 
@@ -140,15 +140,15 @@ pipelines:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
           - > 
-           gcloud components update --quiet 
+          gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create shoppingcart-${REL_TIMESTAMP} 
-          --delivery-pipeline $CD_PIPELINE 
-          --region $REGION 
+          gcloud deploy releases create shoppingcart-${REL_TIMESTAMP} \
+          --delivery-pipeline $CD_PIPELINE \
+          --region $REGION \
           --images=\
-          cartservice=$CART_SVC_IMAGE 
-          --source shoppingcart/
+          cartservice=$CART_SVC_IMAGE \
+          --source shoppingcart/ \
           --annotations=\
           commitSHA=${COMMIT_SHA},\
           commiter=${COMMITER}
@@ -178,18 +178,18 @@ pipelines:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
           - > 
-           gcloud components update --quiet 
+          gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create loadgenerator-${REL_TIMESTAMP} 
-           --delivery-pipeline $CD_PIPELINE 
-           --region $REGION 
-           --images=\
-           loadgenerator=$LOADGEN_SVC_IMAGE 
-           --source loadgenerator/
-           --annotations=\
-           commitSHA=${COMMIT_SHA},\
-           commiter=${COMMITER}
+          gcloud deploy releases create loadgenerator-${REL_TIMESTAMP} \
+          --delivery-pipeline $CD_PIPELINE \
+          --region $REGION \
+          --images=\
+          loadgenerator=$LOADGEN_SVC_IMAGE \
+          --source loadgenerator/ \
+          --annotations=\
+          commitSHA=${COMMIT_SHA},\
+          commiter=${COMMITER}
   - name: deploy_productservices_pipeline
     steps:
     - name: trigger_cloud_deploy_productservices
@@ -220,16 +220,16 @@ pipelines:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
           - > 
-           gcloud components update --quiet 
+          gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create productsvc-${REL_TIMESTAMP} \
+          gcloud deploy releases create productsvc-${REL_TIMESTAMP} \
           --delivery-pipeline $CD_PIPELINE \
           --region $REGION \
           --images=\
           productcatalogservice=$PRODUCTCATALOG_SVC_IMAGE,\
           recommendationservice=$RECOMMENDATION_SVC_IMAGE \
-          --source products/ 
+          --source products/ \
           --annotations=\
           Product_commitSHA=${PRODUCT_COMMIT_SHA},\
           Product_commiter=${PRODUCT_COMMITER},\
@@ -273,10 +273,10 @@ pipelines:
           - echo "Trigger Cloud Deploy Pipeline $CD_PIPELINE"
           - cd $APP_DIR
           - > 
-           gcloud components update --quiet 
+          gcloud components update --quiet 
         onExecute:
           - >
-           gcloud deploy releases create checkoutsvc-${REL_TIMESTAMP} \
+          gcloud deploy releases create checkoutsvc-${REL_TIMESTAMP} \
           --delivery-pipeline $CD_PIPELINE \
           --region $REGION \
           --images=\
