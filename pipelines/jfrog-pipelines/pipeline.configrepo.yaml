@@ -1,0 +1,74 @@
+resources:
+#Repository Path configs for monorepo
+  - name: adsvc_deployment_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path: gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+      files:
+        include: application-manifests/online-boutique/ads/*
+
+  - name: checkoutservices_deployment_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path:  gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+      files:
+        include: application-manifests/online-boutique/checkout/*
+  - name: currencyservices_deployment_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path:  gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+      files:
+        include: application-manifests/online-boutique/currency/*
+  - name: frontendservices_deployment_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path:  gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+      files:
+        include: application-manifests/online-boutique/frontend/*
+  - name: productservices_deployment_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path: gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+      files:
+        include: application-manifests/online-boutique/products/*
+  - name: shoppingcartservices_deployment_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path: gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+      files:
+        include: application-manifests/online-boutique/shoppingcart/*
+  - name: loadgeneratorservices_deployment_repo
+    type: GitRepo
+    configuration:
+      gitProvider: source_repo
+      path: gdg-cloud-montreal/swampup-2022
+      buildOn:
+        commit:                true
+        pullRequestCreate:     true
+      files:
+        include: application-manifests/online-boutique/loadgenerator/*
+  

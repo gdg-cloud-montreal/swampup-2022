@@ -1,0 +1,27 @@
+apiVersion: skaffold/v2beta18
+kind: Config
+metadata:
+  name: frontend
+requires:
+  - configs: ["adservice", "checkout", "currency", "products", "shoppingcart"]
+profiles:
+  - name: dev
+    deploy:
+      kustomize:
+        paths:
+        - overlays/dev/
+      statusCheck: true
+  - name: stg
+    deploy:
+      kustomize:
+        paths:
+        - overlays/stg/
+      statusCheck: true
+  - name: prod
+    deploy:
+      kustomize:
+        paths:
+        - overlays/prod/
+      statusCheck: true
+
+

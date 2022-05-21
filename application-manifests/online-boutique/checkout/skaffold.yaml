@@ -1,0 +1,11 @@
+apiVersion: skaffold/v2beta18
+kind: Config
+metadata:
+  name: checkout
+deploy:
+  kubectl:
+    manifests:
+    - ./checkoutservice.yaml
+    - ./emailservice.yaml
+    - ./paymentservice.yaml
+    - ./shippingservice.yaml
