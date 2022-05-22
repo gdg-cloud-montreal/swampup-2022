@@ -250,10 +250,11 @@ pipelines:
             CD_PIPELINE: "swampup-2022-boutique-checkout"
             APP_DIR: $res_checkoutservices_deployment_repo_resourcePath/application-manifests/online-boutique
             REL_TIMESTAMP: $(date '+%Y%m%d-%H%S')
+            #Service information
             CHECKOUT_COMMITER: $res_checkout_propertybag_commiterLogin
             CHECKOUT_COMMIT_SHA: $res_checkout_propertybag_commitSha  
             EMAIL_COMMITER: $res_email_propertybag_commiterLogin
-            EMAIL_CCOMMIT_SHA: $res_email_propertybag_commitSha
+            EMAIL_COMMIT_SHA: $res_email_propertybag_commitSha
             PAYMENT_COMMITER: $res_payment_propertybag_commiterLogin
             PAYMENT_COMMIT_SHA: $res_payment_propertybag_commitSha  
             SHIPPING_COMMITER: $res_shipping_propertybag_commiterLogin
