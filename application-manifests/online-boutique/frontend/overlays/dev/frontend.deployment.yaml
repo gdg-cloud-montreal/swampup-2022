@@ -12,7 +12,7 @@ spec:
         app: frontend
       annotations:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
-  replicas: 1
+  replicas: 2
   template:
     spec:
       containers:
