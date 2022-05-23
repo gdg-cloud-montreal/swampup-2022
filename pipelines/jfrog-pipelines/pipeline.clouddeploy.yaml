@@ -258,7 +258,7 @@ pipelines:
             PAYMENT_COMMITER: $res_payment_propertybag_commiterLogin
             PAYMENT_COMMIT_SHA: $res_payment_propertybag_commitSha  
             SHIPPING_COMMITER: $res_shipping_propertybag_commiterLogin
-            SHIPPING_CCOMMIT_SHA: $res_shipping_propertybag_commitSha  
+            SHIPPING_COMMIT_SHA: $res_shipping_propertybag_commitSha  
         integrations:        
           - name: artifactory
           - name: gcloud
