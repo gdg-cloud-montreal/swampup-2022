@@ -7,7 +7,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            AD_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/adservice:${res_ads_propertybag_imageTag}
+            AD_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutiqueci-boutique/adservice:${res_ads_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-ads"
             APP_DIR: $res_adsvc_deployment_repo_resourcePath/application-manifests/online-boutique
@@ -45,7 +45,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            CURRENCY_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/currencyservice:${res_currency_propertybag_imageTag}
+            CURRENCY_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutiqueci-boutique/currencyservice:${res_currency_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-currency"
             APP_DIR: $res_currencyservices_deployment_repo_resourcePath/application-manifests/online-boutique
@@ -83,7 +83,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            FRONTEND_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/frontend:${res_frontend_propertybag_imageTag}
+            FRONTEND_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutiqueci-boutique/frontend:${res_frontend_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-frontend"
             APP_DIR: $res_frontendservices_deployment_repo_resourcePath/application-manifests/online-boutique
@@ -121,7 +121,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            CART_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/cartservice:${res_cart_propertybag_imageTag}
+            CART_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutiqueci-boutique/cartservice:${res_cart_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-shoppingcart"
             APP_DIR: $res_shoppingcartservices_deployment_repo_resourcePath/application-manifests/online-boutique
@@ -159,7 +159,7 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            LOADGEN_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/loadgenerator:${res_load_propertybag_imageTag}
+            LOADGEN_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutiqueci-boutique/loadgenerator:${res_load_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-loadgenerator"
             APP_DIR: $res_loadgeneratorservices_deployment_repo_resourcePath/application-manifests/online-boutique
@@ -197,8 +197,8 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            PRODUCTCATALOG_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/productcatalogservice:${res_product_propertybag_imageTag}
-            RECOMMENDATION_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/recommendationservice:${res_recommendations_propertybag_imageTag}
+            PRODUCTCATALOG_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutiqueci-boutique/productcatalogservice:${res_product_propertybag_imageTag}
+            RECOMMENDATION_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutiqueci-boutique/recommendationservice:${res_recommendations_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-products"
             APP_DIR: $res_productservices_deployment_repo_resourcePath/application-manifests/online-boutique
@@ -242,10 +242,10 @@ pipelines:
       configuration:
         affinityGroup: fmkGroup
         environmentVariables:
-            CHECKOUT_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/checkoutservice:${res_checkout_propertybag_imageTag}
-            EMAIL_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/emailservice:${res_email_propertybag_imageTag}
-            PAYMENT_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/paymentservice:${res_payment_propertybag_imageTag}
-            SHIPPING_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutique/shippingservice:${res_shipping_propertybag_imageTag}
+            CHECKOUT_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutiqueci-boutique/checkoutservice:${res_checkout_propertybag_imageTag}
+            EMAIL_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutiqueci-boutique/emailservice:${res_email_propertybag_imageTag}
+            PAYMENT_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutiqueci-boutique/paymentservice:${res_payment_propertybag_imageTag}
+            SHIPPING_SVC_IMAGE: ${int_server_name_value}.jfrog.io/boutiqueci-boutique/shippingservice:${res_shipping_propertybag_imageTag}
             REGION: "us-central1"
             CD_PIPELINE: "swampup-2022-boutique-checkout"
             APP_DIR: $res_checkoutservices_deployment_repo_resourcePath/application-manifests/online-boutique
