@@ -279,6 +279,6 @@ pipelines:
           - >
             gcloud deploy releases create checkoutsvc-${REL_TIMESTAMP} --delivery-pipeline $CD_PIPELINE
             --region $REGION
-            --images=checkoutservice=$CHECKOUT_SVC_IMAGE,emailservice=$EMAIL_SVC_IMAGE,paymentservice=$PAYMENT_SVC_IMAGE,shippingservice=$SHIPPING_SVC_IMAGE \
+            --images=checkoutservice=$CHECKOUT_SVC_IMAGE,emailservice=$EMAIL_SVC_IMAGE,paymentservice=$PAYMENT_SVC_IMAGE,shippingservice=$SHIPPING_SVC_IMAGE
             --source checkout/
             --annotations=Checkout_commitSHA=${CHECKOUT_COMMIT_SHA},Checkout_commiter=$CHECKOUT_COMMITER},Email_commitSHA=${EMAIL_COMMIT_SHA},Email_commiter=${EMAIL_COMMITER},Payment_commitSHA=${PAYMENT_COMMIT_SHA},Payment_commiter=${PAYMENT_COMMITER},Shipping_commitSHA=${SHIPPING_COMMIT_SHA},Shipping_commiter=${SHIPPING_COMMITER}
