@@ -3,9 +3,6 @@ kind: Deployment
 metadata:
   name: frontend
 spec:
-  selector:
-    matchLabels:
-      app: frontend
   template:
     metadata:
       labels:
@@ -17,10 +14,3 @@ spec:
     spec:
       containers:
         - name: frontend
-          resources:
-            requests:
-              cpu: 100m
-              memory: 64Mi
-            limits:
-              cpu: 200m
-              memory: 128Mi
