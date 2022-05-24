@@ -3,16 +3,11 @@ kind: Deployment
 metadata:
   name: frontend
 spec:
-  selector:
-    matchLabels:
-      app: frontend
   template:
     metadata:
       labels:
         app: frontend
-      annotations:
-        sidecar.istio.io/rewriteAppHTTPProbers: "true"
-  replicas: 2
+  replicas: 1
   template:
     spec:
       containers:
