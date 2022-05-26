@@ -7,7 +7,7 @@ spec:
     metadata:
       labels:
         app: frontend
-  replicas: 1
+  replicas: 4
   template:
     spec:
       containers:
