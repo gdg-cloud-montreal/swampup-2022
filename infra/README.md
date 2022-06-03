@@ -94,7 +94,7 @@ gcloud container clusters create-auto dev-cluster \
 gcloud container clusters create-auto staging-cluster  \
     --project=${PROJECT_ID} --region=${REGION} \
     --network custom-vpc \
-    --subnetwork gke-staging-cluster-subnet \
+    --subnetwork gke-stg-cluster-subnet \
     --cluster-secondary-range-name pods \
     --services-secondary-range-name services \
     --async
