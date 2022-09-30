@@ -1,12 +1,40 @@
 # kcc-configs
 
 ## Description
-sample description
+kcc autopilot config bootstrap
 
 ## Usage
 
+Create Config Controller instance
+
+1. Set Environment Variables
+```
+export PROJECT_ID=swampup-2022  
+export REGION=us-central1
+gcloud config set project ${PROJECT_ID}
+```
+
+2. Create Config Controller instance
+```
+gcloud anthos config controller create kcc-controller --full-management --location us-central1
+```
+
+3. Give Config Controller permissions to create resources
+```
+export SA_EMAIL="$(kubectl get ConfigConnectorContext -n config-control -o jsonpath='{.items[0].spec.googleServiceAccount}' 2> /dev/null)"
+
+gcloud project add-iam-policy-binding "${PROJECT_ID}" --member "serviceAccount:${SA_EMAIL}" --role roles/owner
+```
+
+4. Deploy the infrastructure
+```
+kpt live init -n config-control
+kpt live apply
+```
+
+
 ### Fetch the package
-`kpt pkg get REPO_URI[.git]/PKG_PATH[@VERSION] kcc-configs`
+`kpt pkg get https://github.com/cartyc/swampup-2022.git/infra/kcc-configs kcc-configs`
 Details: https://kpt.dev/reference/cli/pkg/get/
 
 ### View package content
