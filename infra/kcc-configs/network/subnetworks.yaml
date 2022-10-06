@@ -1,0 +1,62 @@
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: gke-dev-cluster-subnet
+spec:
+  ipCidrRange: 10.128.0.0/23
+  region: us-central1
+  description: dev subnet
+  networkRef:
+    name: custom-vpc
+  logConfig:
+    aggregationInterval: INTERVAL_10_MIN
+    flowSampling: 0.5
+    metadata: INCLUDE_ALL_METADATA
+  privateIpGoogleAccess: true
+  secondaryIpRange:
+  - ipCidrRange: 10.100.0.0/23
+    rangeName: services
+  - ipCidrRange: 10.0.0.0/16
+    rangeName: pods
+---
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: gke-staging-cluster-subnet
+spec:
+  ipCidrRange: 10.129.0.0/23
+  region: us-central1
+  description: staging subnet
+  networkRef:
+    name: custom-vpc
+  logConfig:
+    aggregationInterval: INTERVAL_10_MIN
+    flowSampling: 0.5
+    metadata: INCLUDE_ALL_METADATA
+  privateIpGoogleAccess: true
+  secondaryIpRange:
+  - ipCidrRange: 10.100.2.0/23
+    rangeName: services
+  - ipCidrRange: 10.2.0.0/16
+    rangeName: pods
+---
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: gke-prod-cluster-subnet
+spec:
+  ipCidrRange: 10.130.0.0/23
+  region: us-central1
+  description: prod subnet
+  networkRef:
+    name: custom-vpc
+  logConfig:
+    aggregationInterval: INTERVAL_10_MIN
+    flowSampling: 0.5
+    metadata: INCLUDE_ALL_METADATA
+  privateIpGoogleAccess: true
+  secondaryIpRange:
+  - ipCidrRange: 10.100.4.0/23
+    rangeName: services
+  - ipCidrRange: 10.4.0.0/16
+    rangeName: pods

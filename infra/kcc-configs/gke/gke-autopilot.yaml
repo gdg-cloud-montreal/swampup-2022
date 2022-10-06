@@ -1,0 +1,53 @@
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: dev-cluster
+spec:
+  description: dev autopilot cluster.
+  enableAutopilot: true
+  location: us-central1
+  releaseChannel:
+    channel: REGULAR
+  networkRef:
+    name: custom-vpc
+  subnetworkRef:
+    name: gke-dev-cluster-subnet
+  ipAllocationPolicy:
+    servicesSecondaryRangeName: services
+    clusterSecondaryRangeName: pods
+---
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: staging-cluster
+spec:
+  description: staging autopilot cluster.
+  enableAutopilot: true
+  location: us-central1
+  releaseChannel:
+    channel: REGULAR
+  networkRef:
+    name: custom-vpc
+  subnetworkRef:
+    name: gke-staging-cluster-subnet
+  ipAllocationPolicy:
+    servicesSecondaryRangeName: services
+    clusterSecondaryRangeName: pods
+---
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: prod-cluster
+spec:
+  description: prod autopilot cluster.
+  enableAutopilot: true
+  location: us-central1
+  releaseChannel:
+    channel: REGULAR
+  networkRef:
+    name: custom-vpc
+  subnetworkRef:
+    name: gke-prod-cluster-subnet
+  ipAllocationPolicy:
+    servicesSecondaryRangeName: services
+    clusterSecondaryRangeName: pods

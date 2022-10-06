@@ -1,0 +1,10 @@
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  labels:
+    label-one: "value-one"
+  name: custom-vpc
+spec:
+  routingMode: REGIONAL
+  autoCreateSubnetworks: false
+  mtu: 1460
