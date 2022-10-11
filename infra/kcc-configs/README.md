@@ -3,9 +3,11 @@
 ## Description
 kcc autopilot config bootstrap
 
+Reference [document](https://cloud.google.com/anthos-config-management/docs/how-to/config-controller-setup#autopilot)
+
 ## Usage
 
-Create Config Controller instance
+Create Config Controller instance that is backed by a private Autopilot GKE cluster.
 
 1. Set Environment Variables
 ```
