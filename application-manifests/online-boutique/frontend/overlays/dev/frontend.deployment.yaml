@@ -12,3 +12,10 @@ spec:
     spec:
       containers:
         - name: frontend
+          resources:
+            requests:
+              cpu: 101m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
