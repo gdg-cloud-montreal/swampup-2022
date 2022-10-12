@@ -7,4 +7,4 @@ serialPipeline:
  stages:
  - targetId: swampup-2022-dev-cluster
  - targetId: swampup-2022-stg-cluster
- - targetId: swampup-2022-prod-cluster
+ - targetId: swampup-2022-prod-clusterg
