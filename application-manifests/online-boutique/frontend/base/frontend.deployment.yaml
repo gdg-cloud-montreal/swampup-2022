@@ -80,7 +80,7 @@ spec:
           #   value: "true"
           resources:
             requests:
-              cpu: 116m
+              cpu: 117m
               memory: 64Mi
             limits:
               cpu: 200m
