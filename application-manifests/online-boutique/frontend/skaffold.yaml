@@ -16,7 +16,7 @@ profiles:
         name: frontend-test
         image: alpine:3.15.4
         command: ["/bin/sh"]
-        args: ["-c", "curl -s -o /dev/null -w "\%{http_code}" http://store-dev.automateit.ca"]
+        args: ["-c","curl -o /dev/null http://store-dev.automateit.ca"]
   - name: stg
     deploy:
       kustomize:
@@ -28,7 +28,7 @@ profiles:
         name: frontend-test
         image: alpine:3.15.4
         command: ["/bin/sh"]
-        args: ["-c", "curl -s -o /dev/null -w "%{http_code}" http://store-stg.automateit.ca"]
+        args: ["-c", "curl -o /dev/null  http://store-stg.automateit.ca"]
   - name: prod
     deploy:
       kustomize:
@@ -40,5 +40,5 @@ profiles:
         name: frontend-test
         image: alpine:3.15.4
         command: ["/bin/sh"]
-        args: ["-c", "curl -s -o /dev/null -w "%{http_code}" http://store.automateit.ca"]
+        args: ["-c","curl -o /dev/null  http://store.automateit.ca"]
 
