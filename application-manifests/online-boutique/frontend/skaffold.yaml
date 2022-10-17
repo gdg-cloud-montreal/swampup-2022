@@ -7,6 +7,8 @@ requires:
 profiles:
   - name: dev
     deploy:
+      kubectl: {}
+    manifests:
       kustomize:
         paths:
         - overlays/dev/
@@ -19,6 +21,8 @@ profiles:
         args: ["-c","curl -o /dev/null http://store-dev.automateit.ca"]
   - name: stg
     deploy:
+      kubectl: {}
+    manifests:
       kustomize:
         paths:
         - overlays/stg/
@@ -31,6 +35,8 @@ profiles:
         args: ["-c", "curl -o /dev/null  http://store-stg.automateit.ca"]
   - name: prod
     deploy:
+      kubectl: {}
+    manifests:
       kustomize:
         paths:
         - overlays/prod/

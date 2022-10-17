@@ -1,4 +1,4 @@
-apiVersion: deploy.cloud.google.com/v1beta1
+apiVersion: deploy.cloud.google.com/v1
 kind: DeliveryPipeline
 metadata:
   name: swampup-2022-boutique-frontend
@@ -8,9 +8,18 @@ serialPipeline:
  - targetId: swampup-2022-dev-cluster
    profiles:
    - dev
+   strategy:
+    standard:
+      verify: true
  - targetId: swampup-2022-stg-cluster
    profiles:
    - stg
+   strategy:
+    standard:
+      verify: true
  - targetId: swampup-2022-prod-cluster
    profiles:
    - prod
+   strategy:
+    standard:
+      verify: true
