@@ -1,4 +1,4 @@
-apiVersion: skaffold/v2beta28
+apiVersion: skaffold/v3alpha1
 kind: Config
 metadata:
   name: frontend
@@ -11,17 +11,37 @@ profiles:
         paths:
         - overlays/dev/
       statusCheck: true
+    verify:
+    - name: verify-frontend
+      container:
+        name: frontend-test
+        image: alpine:3.15.4
+        command: ["/bin/sh"]
+        args: ["-c", "curl -s -o /dev/null -w "%{http_code}" http://store-dev.automateit.ca"]
   - name: stg
     deploy:
       kustomize:
         paths:
         - overlays/stg/
       statusCheck: true
+    verify:
+    - name: verify-frontend
+      container:
+        name: frontend-test
+        image: alpine:3.15.4
+        command: ["/bin/sh"]
+        args: ["-c", "curl -s -o /dev/null -w "%{http_code}" http://store-stg.automateit.ca"]
   - name: prod
     deploy:
       kustomize:
         paths:
         - overlays/prod/
       statusCheck: true
-
+    verify:
+    - name: verify-frontend
+      container:
+        name: frontend-test
+        image: alpine:3.15.4
+        command: ["/bin/sh"]
+        args: ["-c", "curl -s -o /dev/null -w "%{http_code}" http://store.automateit.ca"]
 
