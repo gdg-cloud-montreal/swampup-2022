@@ -16,7 +16,7 @@ profiles:
     - name: verify-frontend
       container:
         name: frontend-test
-        image: alpine:3.15.4
+        image: alpine/curl:3.14
         command: ["/bin/sh"]
         args: ["-c","curl -o /dev/null http://store-dev.automateit.ca"]
   - name: stg
@@ -30,7 +30,7 @@ profiles:
     - name: verify-frontend
       container:
         name: frontend-test
-        image: alpine:3.15.4
+        image: alpine/curl:3.14
         command: ["/bin/sh"]
         args: ["-c", "curl -o /dev/null  http://store-stg.automateit.ca"]
   - name: prod
@@ -44,7 +44,7 @@ profiles:
     - name: verify-frontend
       container:
         name: frontend-test
-        image: alpine:3.15.4
+        image: alpine/curl:3.14
         command: ["/bin/sh"]
         args: ["-c","curl -o /dev/null  http://store.automateit.ca"]
 
