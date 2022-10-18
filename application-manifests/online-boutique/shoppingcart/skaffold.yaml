@@ -1,4 +1,4 @@
-apiVersion: skaffold/v3alpha1
+apiVersion: skaffold/v2beta28
 kind: Config
 metadata:
   name: redis-cartsvc
@@ -7,7 +7,7 @@ deploy:
     manifests:
     - ./redis.yaml
 ---
-apiVersion: skaffold/v3alpha1
+apiVersion: skaffold/v2beta28
 kind: Config
 metadata:
   name: shoppingcart
