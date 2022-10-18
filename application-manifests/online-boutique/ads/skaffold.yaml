@@ -4,6 +4,6 @@ metadata:
   name: adservice
 manifests:
   rawYaml:
-  - adservice.yaml
+  - ./adservice.yaml
 deploy:
   kubectl: {}
