@@ -7,4 +7,4 @@ spec:
     metadata:
       labels:
         app: frontend
-  replicas: 1
+  replicas: 2
